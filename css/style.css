@@ -1,0 +1,15 @@
+td.detail-control {
+    background: url('../img/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.detail-control {
+    background: url('../img/details_close.png') no-repeat center center;
+}
+td.editar-data {
+    background: url("../img/edit.png") no-repeat center center;
+    cursor: pointer;
+}
+td.eliminar-data {
+    background: url("../img/eliminar.png") no-repeat center center;
+    cursor: pointer;
+}
