@@ -92,7 +92,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="<?= base_url(); ?>cargo/"><i class="fa fa-angle-double-right"></i>Cargo</a></li>
-                                <li><a href="<?= base_url(); ?>ciudad/"><i class="fa fa-angle-double-right"></i>Ciudad</a></li>                                
+                                <li><a href="<?= base_url(); ?>marca/"><i class="fa fa-angle-double-right"></i>Marca</a></li>                                
                                 <li><a href="<?= base_url(); ?>vehiculo/"><i class="fa fa-angle-double-right"></i>Vehiculo</a></li>
                                 <li><a href="<?= base_url(); ?>terminal/"><i class="fa fa-angle-double-right"></i>Terminal</a></li>
                                 <li><a href="<?= base_url(); ?>personal/"><i class="fa fa-angle-double-right"></i>Personal</a></li>
