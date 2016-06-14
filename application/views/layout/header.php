@@ -91,41 +91,9 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="<?= base_url(); ?>cargo/"><i class="fa fa-angle-double-right"></i>Cargo</a></li>
-                                <li><a href="<?= base_url(); ?>ciudad/"><i class="fa fa-angle-double-right"></i>Ciudad</a></li>                                
-                                <li><a href="<?= base_url(); ?>vehiculo/"><i class="fa fa-angle-double-right"></i>Vehiculo</a></li>
-                                <li><a href="<?= base_url(); ?>terminal/"><i class="fa fa-angle-double-right"></i>Terminal</a></li>
-                                <li><a href="<?= base_url(); ?>personal/"><i class="fa fa-angle-double-right"></i>Personal</a></li>
-                                <!--li><a href="<?= base_url(); ?>ruta/"><i class="fa fa-angle-double-right"></i>Ruta</a></li-->
-                                <li><a href="<?= base_url(); ?>ciudad/"><i class="fa fa-angle-double-right"></i>Ciudad</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-road"></i> <span>Viaje</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="<?= base_url(); ?>viaje/nuevo_viaje"><i class="fa fa-angle-double-right"></i>Nuevo Viaje</a></li>
-                                <li><a href="<?= base_url(); ?>viaje/"><i class="fa fa-angle-double-right"></i>Lsita de Viajes</a></li>
-                            </ul>
-                        </li>
-                        <!--li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-money"></i> <span>Venta de Pasajes</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="<?= base_url(); ?>index.php/pasaje; ?>"><i class="fa fa-angle-double-right"></i>Pasajes</a></li>
-                            </ul>
-                        </li-->
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-search"></i> <span>Buscar</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="<?= base_url(); ?>index.php/busqueda"><i class="fa fa-angle-double-right"></i>Busquedad</a></li>
+                                <li><a href="<?= base_url(); ?>cargo/"><i class="fa fa-angle-double-right"></i> Cargo</a></li>
+                                <li><a href="<?= base_url(); ?>tipo_equipo/"><i class="fa fa-angle-double-right"></i> Tipo Equipo</a></li>                                
+                                <li><a href="<?= base_url(); ?>usuario/"><i class="fa fa-angle-double-right"></i> Usuario</a></li>
                             </ul>
                         </li>
 

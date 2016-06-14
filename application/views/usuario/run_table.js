@@ -4,14 +4,13 @@ $(document).ready(function() {
 
         "processing": true,
         "ajax": {
-            "url": base_url+"cargo/cargar_datos/",
+            "url": base_url+"usuario/cargar_datos/",
             "type": "POST"
         },
         "columns": [
-            { "data": "car_id" },
-            { "data": "car_descripcion" },
-            { "data": "car_abreviatura" },
-            { "data": "car_estado" },  
+            { "data": "usu_id" },
+            { "data": "usu_name" },
+            { "data": "usu_estado" },  
             {
                 "className":      'editar-data',
                 "orderable":      false,
@@ -62,16 +61,16 @@ $(document).ready(function() {
     
     $('#nuevo_modal').on('click', function () {      //Limpiar los datos del modal-form
         $("#id").val('');
-        $("#descripcion").val('');
-        $("#abreviatura").val('');
+        $("#name").val('');
+        $("#password").val('');
     } );
 
     $('#tab tbody').on('click', 'td.editar-data', function () { //Agregar los datos correspondientes al modal-form
         var tr = $(this).closest('tr');
         var row = table.row( tr );
-        $("#id").val(row.data().car_id);
-        $("#descripcion").val(row.data().car_descripcion);
-        $("#abreviatura").val(row.data().car_abreviatura);
+        $("#id").val(row.data().usu_id);
+        $("#name").val(row.data().usu_name);
+        $("#password").val('');
         $("#modal_form").modal({show: true});
     } );
 
@@ -79,22 +78,22 @@ $(document).ready(function() {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
         $("#modal_delete").modal({show: true});
-        $("#id_dato_eliminar").val(row.data().car_id);
-        $('#desc_dato_eliminar').html(row.data().car_descripcion);
+        $("#id_dato_eliminar").val(row.data().usu_id);
+        $('#desc_dato_eliminar').html(row.data().usu_name);
 
     } );
 
     $('#submit_form').on('click', function () {        //Enviar los datos del modal-form a guardar en el controlador
-        var campos_form = ["abreviatura","descripcion"];//campos que queremos que se validen
+        var campos_form = ["password","name"];//campos que queremos que se validen
         if(!validar_form(campos_form)){
             return false;            
         }
 
         id = $("#id").val();
-        descripcion = $("#descripcion").val();
-        abreviatura = $("#abreviatura").val();
+        name = $("#name").val();
+        password = $("#password").val();
         
-        $.post(base_url+"cargo/guardar",{id:id,descripcion:descripcion,abreviatura:abreviatura},function(valor){
+        $.post(base_url+"usuario/guardar",{id:id,name:name,password:password},function(valor){
             if(!isNaN(valor)){
                 alert('Guardado exitoso');
                 table.ajax.reload();
@@ -108,7 +107,7 @@ $(document).ready(function() {
 
     $('#delete_click').on('click', function () {   //Enviar los datos del modal-form a eliminar en el controlador
         var id = $("#id_dato_eliminar").val();
-        $.post(base_url+"cargo/eliminar",{id:id},function(valor){
+        $.post(base_url+"usuario/eliminar",{id:id},function(valor){
             if(!isNaN(valor)){
                 alert('Dato eliminado');
                 table.ajax.reload();
