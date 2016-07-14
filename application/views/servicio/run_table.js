@@ -4,26 +4,19 @@ $(document).ready(function() {
 
         "processing": true,
         "ajax": {
-            "url": base_url+"cargo/cargar_datos/",
+            "url": base_url+"servico/cargar_datos/",
             "type": "POST"
         },
         "columns": [
-            { "data": "car_id" },
-            { "data": "car_descripcion" },
-            { "data": "car_abreviatura" },
-            { "data": "car_estado" },  
-            {
-                "className":      'editar-data',
-                "orderable":      false,
-                "data":           null,
-                "defaultContent": ''
-            },
-            {
-                "className":      'eliminar-data',
-                "orderable":      false,
-                "data":           null,
-                "defaultContent": ''
-            }
+            { "data": "ser_id" },
+            { "data": "ser_codigo" },
+            { "data": "ser_tipo_equipo" },
+            { "data": "ser_marca" }, 
+            { "data": "ser_modelo" },
+            { "data": "ser_descripcion" }, 
+            { "data": "ser_estado_recepcion" },
+            { "data": "ser_estado_servicio" },
+            { "data": "ser_fecha_recepcion" },
         ],
         "bPaginate": true,
         "bLengthChange": true,

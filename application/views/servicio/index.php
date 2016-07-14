@@ -7,13 +7,13 @@
                     <tr>
                         <th>Id</th>
                         <th>Codigo</th>
+                        <th>Tipo Equipo</th>
                         <th>Marca</th>
                         <th>Modelo</th>
                         <th>Descripcion</th>
-                        <th>Fecha Entrega</th>
+                        <th>Estado Recepcion</th>
+                        <th>Estado Servicio</th>
                         <th>Fecha Recepcion</th>
-                        <th>Estado</th>
-                        <th colspan="2">Acciones</th>
                     </tr>
                 </thead>  
             </table>
