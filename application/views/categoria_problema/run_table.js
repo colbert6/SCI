@@ -4,14 +4,14 @@ $(document).ready(function() {
 
         "processing": true,
         "ajax": {
-            "url": base_url+"cargo/cargar_datos/",
+            "url": base_url+"categoria_problema/cargar_datos/",
             "type": "POST"
         },
         "columns": [
-            { "data": "car_id" },
-            { "data": "car_descripcion" },
-            { "data": "car_abreviatura" },
-            { "data": "car_estado" },  
+            { "data": "catpro_id" },
+            { "data": "catpro_descripcion" },            
+            { "data": "catpro_abreviatura" },  
+            { "data": "catpro_estado" },
             {
                 "className":      'editar-data',
                 "orderable":      false,
@@ -69,9 +69,9 @@ $(document).ready(function() {
     $('#tab tbody').on('click', 'td.editar-data', function () { //Agregar los datos correspondientes al modal-form
         var tr = $(this).closest('tr');
         var row = table.row( tr );
-        $("#id").val(row.data().car_id);
-        $("#descripcion").val(row.data().car_descripcion);
-        $("#abreviatura").val(row.data().car_abreviatura);
+        $("#id").val(row.data().catpro_id);
+        $("#descripcion").val(row.data().catpro_descripcion);
+        $("#abreviatura").val(row.data().catpro_abreviatura);
         $("#modal_form").modal({show: true});
     } );
 
@@ -79,8 +79,8 @@ $(document).ready(function() {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
         $("#modal_delete").modal({show: true});
-        $("#id_dato_eliminar").val(row.data().car_id);
-        $('#desc_dato_eliminar').html(row.data().car_descripcion);
+        $("#id_dato_eliminar").val(row.data().catpro_id);
+        $('#desc_dato_eliminar').html(row.data().catpro_descripcion);
 
     } );
 
@@ -94,7 +94,7 @@ $(document).ready(function() {
         descripcion = $("#descripcion").val();
         abreviatura = $("#abreviatura").val();
         
-        $.post(base_url+"cargo/guardar",{id:id,descripcion:descripcion,abreviatura:abreviatura},function(valor){
+        $.post(base_url+"categoria_problema/guardar",{id:id,descripcion:descripcion,abreviatura:abreviatura},function(valor){
             if(!isNaN(valor)){
                 alert('Guardado exitoso');
                 table.ajax.reload(null, false);
@@ -108,7 +108,7 @@ $(document).ready(function() {
 
     $('#delete_click').on('click', function () {   //Enviar los datos del modal-form a eliminar en el controlador
         var id = $("#id_dato_eliminar").val();
-        $.post(base_url+"cargo/eliminar",{id:id},function(valor){
+        $.post(base_url+"categoria_problema/eliminar",{id:id},function(valor){
             if(!isNaN(valor)){
                 alert('Dato eliminado');
                 table.ajax.reload(null, false);

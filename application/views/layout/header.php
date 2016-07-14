@@ -16,7 +16,7 @@
         <link href="<?= base_url(); ?>css/style.css" rel="stylesheet" type="text/css" />
        
     </head>
-    <body class="skin-blue">
+    <body class="skin-black">
         <input type="hidden" id="base_url" value="<?= base_url(); ?>">
                    
         <header class="header">
@@ -87,16 +87,28 @@
 
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-cog"></i> <span>Mantenimiento</span>
+                                <i class="fa fa-cog"></i> <span>Administracion</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="<?= base_url(); ?>cargo/"><i class="fa fa-angle-double-right"></i> Cargo</a></li>
-                                <li><a href="<?= base_url(); ?>tipo_equipo/"><i class="fa fa-angle-double-right"></i> Tipo Equipo</a></li>                                
-                                <li><a href="<?= base_url(); ?>usuario/"><i class="fa fa-angle-double-right"></i> Usuario</a></li>
+                                <li><a href="<?= base_url(); ?>cargo/"><i class="fa fa-angle-double-right"></i>Cargo</a></li>
+                                <li><a href="<?= base_url(); ?>tipo_equipo/"><i class="fa fa-angle-double-right"></i>Tipo Equipo</a></li>                                
+                                <li><a href="<?= base_url(); ?>usuario/"><i class="fa fa-angle-double-right"></i>Usuario</a></li>
+                                <li><a href="<?= base_url(); ?>marca/"><i class="fa fa-angle-double-right"></i>Marca</a></li>                                
+                                <li><a href="<?= base_url(); ?>categoria_problema/"><i class="fa fa-angle-double-right"></i>Categoria Problema</a></li>
                             </ul>
                         </li>
 
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-life-ring"></i> <span>Soporte Tecnico</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="<?= base_url(); ?>servicio/nuevo_servicio"><i class="fa fa-angle-double-right"></i>Nuevo</a></li>
+                                <li><a href="<?= base_url(); ?>servicio/lista_servicio"><i class="fa fa-angle-double-right"></i>Detalles</a></li>
+                            </ul>
+                        </li>
                         
                     </ul>
                 </section>

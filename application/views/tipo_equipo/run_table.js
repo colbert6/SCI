@@ -97,7 +97,7 @@ $(document).ready(function() {
         $.post(base_url+"tipo_equipo/guardar",{id:id,descripcion:descripcion,abreviatura:abreviatura},function(valor){
             if(!isNaN(valor)){
                 alert('Guardado exitoso');
-                table.ajax.reload();
+                table.ajax.reload(null, false);
                 $("#modal_form").modal('hide');
             }else{
                 alert('guardar error:'+valor);
@@ -111,7 +111,7 @@ $(document).ready(function() {
         $.post(base_url+"tipo_equipo/eliminar",{id:id},function(valor){
             if(!isNaN(valor)){
                 alert('Dato eliminado');
-                table.ajax.reload();
+                table.ajax.reload(null, false);
                 $("#modal_delete").modal('hide');
             }else{
                 alert('eliminar error:'+valor);
