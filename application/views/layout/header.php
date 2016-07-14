@@ -16,7 +16,7 @@
         <link href="<?= base_url(); ?>css/style.css" rel="stylesheet" type="text/css" />
        
     </head>
-    <body class="skin-black">
+    <body class="pace-done skin-blue">
         <input type="hidden" id="base_url" value="<?= base_url(); ?>">
                    
         <header class="header">

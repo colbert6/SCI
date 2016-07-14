@@ -61,6 +61,13 @@
             echo json_encode($result);
         }
 
+        public function cargar_datos_seleccion($tabla='cliente')
+        {   
+            $consulta=$this->cliente_model->select($tabla);
+            
+            echo json_encode($consulta->result());
+        }
+
 
 
     }

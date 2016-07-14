@@ -20,10 +20,11 @@
         public function nuevo_servicio()
         {   
             $dato_header= array ( 'titulo'=> 'Nuevo Servicio');
+            $dato_foother= array ( 'add_servicio'=> 'si');
 
             $this->load->view("/layout/header.php",$dato_header);
             $this->load->view("/servicio/nuevo_servicio.php");
-            $this->load->view("/layout/foother_table.php");
+            $this->load->view("/layout/foother_table.php",$dato_foother);
         }
 
         public function guardar()

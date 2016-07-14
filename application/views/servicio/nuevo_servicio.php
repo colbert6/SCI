@@ -36,8 +36,8 @@
                                 <input name="id_producto" id="id_producto" type="hidden">
                                 <input name="producto" id="producto" class="form-control" readonly="true" placeholder="Cliente">
                             </div>
-                            <button type="button" class="btn btn-success" id="open_modal_producto">Buscar</button> 
-                            <button type="button" class="btn btn-primary" id="open_modal_producto">Agregar</button>
+                            <a class="btn btn-success k-button" id="cliente_buscar" data-toggle="modal" data-target="#modal_cliente_buscar">Buscar</a>
+                            <a class="btn btn-primary k-button" id="cliente_agregar" data-toggle="modal" data-target="#modal_cliente_agregar">Agregar</a>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -76,7 +76,7 @@
                                     ?>
                                 </select>
                             </div>
-                            <button type="button" class="btn btn-primary" id="open_modal_tipo"><i class="fa fa-plus"></i></button> 
+                            <a class="btn btn-primary k-button" id="tipo_agregar" data-toggle="modal" data-target="#modal_tipo_equipo_agregar"><i class="fa fa-plus"></i></a>
                         </div>
                     </div>
                 
@@ -93,7 +93,7 @@
                                     ?>
                                 </select>
                             </div>
-                            <button type="button" class="btn btn-primary" id="open_modal_tipo"><i class="fa fa-plus"></i></button>
+                            <a class="btn btn-primary k-button" id="marca_agregar" data-toggle="modal" data-target="#modal_marca_agregar"><i class="fa fa-plus"></i></a>
                         </div>
                     </div>
                 
@@ -139,29 +139,27 @@
                      
                 </div>
                 <div class="row ">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <div class="callout callout-danger">
-                                <h4>Accesorio 1</h4>
-                                <p>There is a problem that we need to fix.</p>
-                            </div>                            
-                        </div>                     
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <div class="callout callout-danger">
-                                <h4>Accesorio 2</h4>
-                                <p>There is a problem that we need to fix.</p>
-                            </div>                            
-                        </div>                     
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <div class="callout callout-danger">
-                                <h4>Accesorio 3</h4>
-                                <p>There is a problem that we need to fix.</p>
-                            </div>                            
-                        </div>                     
+                    <div class="col-md-8">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Accesorio</th>
+                                <th>Tipo</th>
+                                <th style="width: 40px">Cantidad</th>
+                            </tr>
+                            <tr>
+                                <td>1.</td>
+                                <td>Accesorio 1</td>
+                                <td>Tipo 1</td>
+                                <td><span class="badge bg-red">55%</span></td>
+                            </tr>
+                            <tr>
+                                <td>2.</td>
+                                <td>Accesorio 2</td>
+                                <td>Tipo 2</td>
+                                <td><span class="badge bg-yellow">70%</span></td>
+                            </tr>
+                        </table>                    
                     </div>
                 </div>
 
@@ -224,3 +222,135 @@
 </div>
 <button class="btn btn-info btn-flat" type="submit">Guardar</button>
 </form>
+
+<!---MODALS -->
+<style>
+        .modal .modal-content{
+            width: 800px;
+            left: -18%;
+        }
+</style>
+
+<!-- MODAL CLIENTE BUSCAR  -->
+<div class="modal fade" id="modal_cliente_buscar" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"> Buscar Cliente</h4>
+            </div>
+            <div class="modal-body">
+                <div id="grillaCliente">
+                    
+                </div>                    
+            </div>
+            <div class="modal-footer clearfix">
+                <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar</button>
+            </div>
+           
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!---MODAL CLIENTE  AGREGAR-->
+<div class="modal fade" id="modal_cliente_agregar" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><i class="fa fa-users"></i> Formulario Cliente</h4>
+            </div>
+            <form role="form" action="" method="post">
+                <div class="modal-body">
+                    <div id="msg" class="form-group has-warning"></div>  
+                    <div class="form-group">
+                        <label for="descripcion">Dni</label>
+                        <input type="text" required class="form-control" id="dni" name="dni" placeholder="Ingrese DNI" onkeypress="return soloNumeros(event)" maxlength="8">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Nombre y Apellido</label>
+                        <input type="text" required class="form-control" id="nombre" name="nombre" placeholder="Ingrese nombre y apellido" onkeypress="return soloLetras(event)">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Direccion</label>
+                        <input type="text" required class="form-control" id="direccion" name="direccion" placeholder="Ingrese direccion" onkeypress="return soloLetras(event)">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Telefono</label>
+                        <input type="text" required class="form-control" id="telefono" name="telefono" placeholder="Ingrese telefono" onkeypress="return soloNumeros(event)" maxlength="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Email</label>
+                        <input type="text" required class="form-control" id="email" name="email" placeholder="Ingrese email" onkeypress="return soloLetras(event)">
+                    </div>
+                </div>
+                <div class="modal-footer clearfix">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
+                    <button type="button" id='submit_form' class="btn btn-primary pull-left"><i class="fa fa-check"></i> Guardar</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!-- Modal de Tipo de equipo-->
+<div class="modal fade" id="modal_tipo_equipo_agregar" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><i class="fa fa-tags"></i> Formulario Tipo Equipo</h4>
+            </div>
+            <form role="form" action="" method="post">
+                <div class="modal-body">
+                    <div id="msg" class="form-group has-warning"></div>
+                    
+                    <div class="form-group">
+                        <label for="descripcion">Descripcion</label>
+                        <input type="text" required class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese descripcion" onkeypress="return soloLetras(event)">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Abreviatura</label>
+                        <input type="text" required class="form-control" id="abreviatura" name="abreviatura" placeholder="Ingrese abreviatura" onkeypress="return soloLetras(event)">
+                    </div>
+                </div>
+                <div class="modal-footer clearfix">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
+                    <button type="button" id='submit_form' class="btn btn-primary pull-left"><i class="fa fa-check"></i> Guardar</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!-- Modal de Marca-->
+<div class="modal fade" id="modal_marca_agregar" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><i class="fa fa-users"></i> Formulario Marca</h4>
+            </div>
+            <form role="form" action="" method="post">
+                <div class="modal-body">
+                    <div id="msg" class="form-group has-warning"></div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripcion</label>
+                        <input type="text" required class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese descripcion" onkeypress="return soloLetras(event)">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Abreviatura</label>
+                        <input type="text" required class="form-control" id="abreviatura" name="abreviatura" placeholder="Ingrese abreviatura" onkeypress="return soloLetras(event)">
+                    </div>
+                </div>
+                <div class="modal-footer clearfix">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
+                    <button type="button" id='submit_form' class="btn btn-primary pull-left"><i class="fa fa-check"></i> Guardar</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal --> 
+   
