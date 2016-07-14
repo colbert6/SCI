@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-07-2016 a las 17:05:37
+-- Tiempo de generación: 14-07-2016 a las 23:27:40
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.23
 
@@ -52,7 +52,8 @@ CREATE TABLE `cargo` (
 
 INSERT INTO `cargo` (`car_id`, `car_descripcion`, `car_abreviatura`, `car_estado`) VALUES
 (1, 'Tecnico', 'Tec.', 1),
-(2, 'Vendedor', 'Vend.', 1);
+(2, 'Vendedor', 'Vend.', 1),
+(3, 'Dispositivo de Almacenamiento', '0', 1);
 
 -- --------------------------------------------------------
 
@@ -123,6 +124,14 @@ CREATE TABLE `pieza` (
   `tipie_id` int(11) NOT NULL,
   `pie_estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `pieza`
+--
+
+INSERT INTO `pieza` (`pie_id`, `pie_nombre`, `pie_descripcion`, `tipie_id`, `pie_estado`) VALUES
+(1, 'Teclado', 'Teclado SF', 1, 1),
+(2, 'Disco Duros', 'Disco Duro Sata', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -208,8 +217,17 @@ CREATE TABLE `tipo_equipo` (
 CREATE TABLE `tipo_pieza` (
   `tipie_id` int(11) NOT NULL,
   `tipie_nombre` varchar(50) NOT NULL,
-  `tipie_descripcion` varchar(100) NOT NULL
+  `tipie_descripcion` varchar(100) NOT NULL,
+  `tipie_estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tipo_pieza`
+--
+
+INSERT INTO `tipo_pieza` (`tipie_id`, `tipie_nombre`, `tipie_descripcion`, `tipie_estado`) VALUES
+(1, 'E/S', 'Dispositivo de Entrada y Salida', 1),
+(2, 'ALMACENAMIENTO', 'Dispositivo de Almacenamiento', 1);
 
 -- --------------------------------------------------------
 
@@ -332,7 +350,7 @@ ALTER TABLE `accesorio`
 -- AUTO_INCREMENT de la tabla `cargo`
 --
 ALTER TABLE `cargo`
-  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `categoria_problema`
 --
@@ -357,7 +375,7 @@ ALTER TABLE `personal`
 -- AUTO_INCREMENT de la tabla `pieza`
 --
 ALTER TABLE `pieza`
-  MODIFY `pie_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `pie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `problema`
 --
@@ -387,7 +405,7 @@ ALTER TABLE `tipo_equipo`
 -- AUTO_INCREMENT de la tabla `tipo_pieza`
 --
 ALTER TABLE `tipo_pieza`
-  MODIFY `tipie_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tipie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
