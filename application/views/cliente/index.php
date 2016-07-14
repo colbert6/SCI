@@ -6,9 +6,11 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Descripcion</th>
-                        <th>Abreviatura</th>
-                        <th>Estado</th>
+                        <th>Dni</th>
+                        <th>Nombre</th>
+                        <th>Direccion</th>
+                        <th>Telefono</th>
+                        <th>Email</th>
                         <th colspan="2">Acciones</th>
                     </tr>
                 </thead>  
@@ -25,7 +27,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><i class="fa fa-users"></i> Formulario Marca</h4>
+                <h4 class="modal-title"><i class="fa fa-users"></i> Formulario Cliente</h4>
             </div>
             <form role="form" action="" method="post">
                 <div class="modal-body">
@@ -35,12 +37,24 @@
                         <input type="text" class="form-control" id="id" name="id" readonly="readonly" >
                     </div>  
                     <div class="form-group">
-                        <label for="descripcion">Descripcion</label>
-                        <input type="text" required class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese descripcion" onkeypress="return soloLetras(event)">
+                        <label for="descripcion">Dni</label>
+                        <input type="text" required class="form-control" id="dni" name="dni" placeholder="Ingrese DNI" onkeypress="return soloNumeros(event)" maxlength="8">
                     </div>
                     <div class="form-group">
-                        <label for="descripcion">Abreviatura</label>
-                        <input type="text" required class="form-control" id="abreviatura" name="abreviatura" placeholder="Ingrese abreviatura" onkeypress="return soloLetras(event)">
+                        <label for="descripcion">Nombre y Apellido</label>
+                        <input type="text" required class="form-control" id="nombre" name="nombre" placeholder="Ingrese nombre y apellido" onkeypress="return soloLetras(event)">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Direccion</label>
+                        <input type="text" required class="form-control" id="direccion" name="direccion" placeholder="Ingrese direccion" onkeypress="return soloLetras(event)">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Telefono</label>
+                        <input type="text" required class="form-control" id="telefono" name="telefono" placeholder="Ingrese telefono" onkeypress="return soloNumeros(event)" maxlength="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Email</label>
+                        <input type="text" required class="form-control" id="email" name="email" placeholder="Ingrese email" onkeypress="return soloLetras(event)">
                     </div>
                 </div>
                 <div class="modal-footer clearfix">
