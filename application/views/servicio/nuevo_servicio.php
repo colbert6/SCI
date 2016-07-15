@@ -33,8 +33,8 @@
                         <div class="form-group" >
                                                            
                             <div class="col-md-9" style="padding-right: 0px;">
-                                <input name="id_producto" id="id_producto" type="hidden">
-                                <input name="producto" id="producto" class="form-control" readonly="true" placeholder="Cliente">
+                                <input name="id_cliente" id="id_cliente" type="hidden">
+                                <input name="nombre_cliente" id="nombre_cliente" class="form-control" readonly="true" placeholder="Cliente">
                             </div>
                             <a class="btn btn-success k-button" id="cliente_buscar" data-toggle="modal" data-target="#modal_cliente_buscar">Buscar</a>
                             <a class="btn btn-primary k-button" id="cliente_agregar" data-toggle="modal" data-target="#modal_cliente_agregar">Agregar</a>
@@ -44,7 +44,7 @@
                         <div class="form-group" >
                             <label class="col-md-2 control-label" >Fecha:</label>
                             <div class="col-md-10" >
-                                <input name="fecha" id="fecha" class="form-control" readonly="readonly" value="">
+                                <input name="fecha" id="fecha" class="form-control" readonly="readonly" value="<?= $fecha ?>">
                             </div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                         <div class="form-group" >
                             <label class="col-md-2 control-label"  >Tipo:</label>
                             <div class="col-md-8 quitar_paddin_rigth" >
-                                <select class="form-control" id="cargo" name="cargo" >
+                                <select class="form-control" id="tipo" name="tipo" >
                                     <option value="" >Seleccione Tipo</option>
                                     <?php /*
                                         foreach ($cargo->result() as $datos ) {
@@ -84,7 +84,7 @@
                         <div class="form-group" >
                             <label class="col-md-2 control-label" >Marca:</label>
                             <div class="col-md-8 quitar_paddin_rigth" >
-                                <select class="form-control" id="cargo" name="cargo" >
+                                <select class="form-control" id="marca" name="marca" >
                                     <option value="" >Seleccione Marca</option>
                                     <?php /*
                                         foreach ($cargo->result() as $datos ) {
@@ -281,7 +281,7 @@
                     </div>
                     <div class="form-group">
                         <label for="descripcion">Email</label>
-                        <input type="text" required class="form-control" id="email" name="email" placeholder="Ingrese email" onkeypress="return soloLetras(event)">
+                        <input type="email" required class="form-control" id="email" name="email" placeholder="Ingrese email" onkeypress="return soloLetras(event)">
                     </div>
                 </div>
                 <div class="modal-footer clearfix">

@@ -22,8 +22,15 @@
             $dato_header= array ( 'titulo'=> 'Nuevo Servicio');
             $dato_foother= array ( 'add_servicio'=> 'si');
 
+            //$data=$this->venta_model->parametros_nueva_servicio()->result_array();
+
+            //$parametro=array('num_documento'=>'Boleta - 00'.$data[0]['num_doc'],
+            //                    'fecha'=>date('Y-m-d'));
+
+            $parametro=array('fecha'=>date('Y-m-d H:i:s'));
+
             $this->load->view("/layout/header.php",$dato_header);
-            $this->load->view("/servicio/nuevo_servicio.php");
+            $this->load->view("/servicio/nuevo_servicio.php",$parametro);
             $this->load->view("/layout/foother_table.php",$dato_foother);
         }
 

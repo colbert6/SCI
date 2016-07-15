@@ -34,12 +34,11 @@ $(document).ready(function() {
             HTML = HTML + '<td>'+datos[i].cli_direccion+'</td>';
             HTML = HTML + '<td>'+datos[i].cli_telefono+'</td>';
             HTML = HTML + '<td>'+datos[i].cli_email+'</td>';
-            var id_p = datos[i].cli_dni;
+            var id_c = datos[i].cli_id;
             var n = datos[i].cli_nombre;
-            var pc = datos[i].cli_direccion;
-            var s = datos[i].cli_telefono;
+            var d = datos[i].cli_dni
             HTML = HTML + '<td><a style="margin-right:4px" href="javascript:void(0)" '+
-                        ' onclick="sel_producto(\'' + id_p + '\',\'' + n + '\',\'' + s + '\',\'' + pc + '\')" class="btn btn-success">Add </a>';
+                        ' onclick="sel_cliente(\'' + id_c + '\',\'' + n + '\'' + d + '\')" class="btn btn-success">Add </a>';
             HTML = HTML + '</td>';
             HTML = HTML + '</tr>';
         }
@@ -55,3 +54,11 @@ $(document).ready(function() {
 
 
 } );
+
+    function sel_cliente(id_c,n,d) {
+    
+        $("#id_cliente").val(id_c);
+        $("#nombre_cliente").val(n+' DNI:'+d);
+        $('#modal_cliente_buscar').modal('hide');    
+        $("#tipo_equipo").focus();
+    }

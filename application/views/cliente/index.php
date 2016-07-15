@@ -55,7 +55,7 @@
                     </div>
                     <div class="form-group">
                         <label for="descripcion">Email</label>
-                        <input type="text" required class="form-control" id="email" name="email" placeholder="Ingrese email" onkeypress="return soloLetras(event)">
+                        <input type="email" required class="form-control" id="email" name="email" placeholder="Ingrese email" >
                     </div>
                 </div>
                 <div class="modal-footer clearfix">
