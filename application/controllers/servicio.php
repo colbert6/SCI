@@ -5,7 +5,7 @@
         
         function __construct(){
             parent::__construct();
-            //$this->load->model('servicio_model');           
+            $this->load->model('servicio_model');           
         }
         
         public function lista_servicio()
@@ -33,12 +33,12 @@
                 $data= array ( 'id'=> $this->input->post('id'),
                                 'descripcion'=> $this->input->post('descripcion'),
                                 'abreviatura'=> $this->input->post('abreviatura'));
-                $guardar=$this->cargo_model->editar($data);   
+                $guardar=$this->servicio_model->editar($data);   
 
             }else{
                 $data= array (  'descripcion'=> $this->input->post('descripcion'),
                                 'abreviatura'=> $this->input->post('abreviatura') );
-                $guardar=$this->cargo_model->crear($data);
+                $guardar=$this->servicio_model->crear($data);
                 
             } 
             echo json_encode($guardar);   
@@ -46,13 +46,13 @@
      
         public function eliminar()
         {            
-            $guardar=$this->cargo_model->eliminar($_POST['id']);
+            $guardar=$this->servicio_model->eliminar($_POST['id']);
             echo json_encode($guardar);  
         }
 
-        public function cargar_datos($tabla='cargo')
+        public function cargar_datos($tabla='servicio')
         {   
-            $consulta=$this->cargo_model->select($tabla);
+            $consulta=$this->servicio_model->select($tabla);
             $result= array("draw"=>1,
                 "recordsTotal"=>$consulta->num_rows(),
                  "recordsFiltered"=>$consulta->num_rows(),
