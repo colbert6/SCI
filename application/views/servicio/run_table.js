@@ -4,7 +4,7 @@ $(document).ready(function() {
 
         "processing": true,
         "ajax": {
-            "url": base_url+"servico/cargar_datos/",
+            "url": base_url+"servicio/cargar_datos/",
             "type": "POST"
         },
         "columns": [
@@ -52,14 +52,8 @@ $(document).ready(function() {
         'iDisplayLength': 10,
         'aLengthMenu': [[5, 10, 20], [5, 10, 20]]
     } );
-    
-    $('#nuevo_modal').on('click', function () {      //Limpiar los datos del modal-form
-        $("#id").val('');
-        $("#descripcion").val('');
-        $("#abreviatura").val('');
-    } );
 
-    $('#tab tbody').on('click', 'td.editar-data', function () { //Agregar los datos correspondientes al modal-form
+/*    $('#tab tbody').on('click', 'td.editar-data', function () { //Agregar los datos correspondientes al modal-form
         var tr = $(this).closest('tr');
         var row = table.row( tr );
         $("#id").val(row.data().car_id);
@@ -110,6 +104,6 @@ $(document).ready(function() {
                 alert('eliminar error:'+valor);
             }
         });
-    } );
+    } );*/
 
 } );
