@@ -85,7 +85,7 @@ $(document).ready(function() {
     } );
 
     $('#submit_form').on('click', function () {        //Enviar los datos del modal-form a guardar en el controlador
-        var campos_form = ["abreviatura","descripcion"];//campos que queremos que se validen
+        var campos_form = ["descripcion"];//campos que queremos que se validen
         if(!validar_form(campos_form)){
             return false;            
         }

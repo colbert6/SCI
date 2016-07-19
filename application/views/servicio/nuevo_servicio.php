@@ -1,4 +1,4 @@
-<link href="<?= base_url(); ?>css/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+
 <style type="text/css">
 .option_oculta{
     display: none;
@@ -18,7 +18,7 @@
 </style>
 
 
-<form role="form" action="<?= base_url()."viaje/guardar_nuevo_viaje" ?>" method="post">
+<form role="form" action="" method="post">
 <input type="hidden" value="1" name="guardar">    
 <div class="row"><!-- Formulario de la ruta Viaje -->
     <div class="col-md-12">
@@ -54,7 +54,7 @@
     </div>
 </div>
 
-<div class="row"><!-- Formulario de la ruta Viaje -->
+<div class="row"><!-- Formulario del Equipo -->
     <div class="col-md-12">
         <div class="box box-success">
             <div class="box-header">
@@ -62,21 +62,21 @@
                 <h3 class="box-title">Informacion del Equipo</h3>
             </div>
             <div class="box-body">
-                <div class="row" >
+                <div class="row row_separar" >
                     <div class="col-md-4">
                         <div class="form-group" >
                             <label class="col-md-2 control-label"  >Tipo:</label>
                             <div class="col-md-8 quitar_paddin_rigth" >
-                                <select class="form-control" id="tipo" name="tipo" >
+                                <select class="form-control" id="tipo_equipo" name="tipo_equipo" >
                                     <option value="" >Seleccione Tipo</option>
-                                    <?php /*
-                                        foreach ($cargo->result() as $datos ) {
-                                            echo "<option value='".$datos->car_id."'>".$datos->car_descripcion."</option>";
-                                        } */
+                                    <?php 
+                                        foreach ($tipo_equipo->result() as $datos ) {
+                                            echo "<option value='".$datos->tipequ_id."'>".$datos->tipequ_descripcion."</option>";
+                                        } 
                                     ?>
                                 </select>
                             </div>
-                            <a class="btn btn-primary k-button" id="tipo_agregar" data-toggle="modal" data-target="#modal_tipo_equipo_agregar"><i class="fa fa-plus"></i></a>
+                            <!--a class="btn btn-primary k-button" id="tipo_agregar" data-toggle="modal" data-target="#modal_tipo_equipo_agregar"><i class="fa fa-plus"></i></a-->
                         </div>
                     </div>
                 
@@ -84,16 +84,16 @@
                         <div class="form-group" >
                             <label class="col-md-2 control-label" >Marca:</label>
                             <div class="col-md-8 quitar_paddin_rigth" >
-                                <select class="form-control" id="marca" name="marca" >
+                                <select class="form-control" id="marca_equipo" name="marca_equipo" >
                                     <option value="" >Seleccione Marca</option>
-                                    <?php /*
-                                        foreach ($cargo->result() as $datos ) {
-                                            echo "<option value='".$datos->car_id."'>".$datos->car_descripcion."</option>";
-                                        } */
+                                    <?php 
+                                        foreach ($marca->result() as $datos ) {
+                                            echo "<option value='".$datos->mar_id."'>".$datos->mar_descripcion."</option>";
+                                        } 
                                     ?>
                                 </select>
                             </div>
-                            <a class="btn btn-primary k-button" id="marca_agregar" data-toggle="modal" data-target="#modal_marca_agregar"><i class="fa fa-plus"></i></a>
+                            <!--a class="btn btn-primary k-button" id="marca_agregar" data-toggle="modal" data-target="#modal_marca_agregar"><i class="fa fa-plus"></i></a-->
                         </div>
                     </div>
                 
@@ -101,7 +101,7 @@
                         <div class="form-group" >
                             <label class="col-md-2 control-label" >Modelo:</label>
                             <div class="col-md-8 quitar_paddin_rigth">
-                                <input name="fecha" id="fecha" class="form-control" >   
+                                <input name="modelo_equipo" id="modelo_equipo" class="form-control" >   
                             </div>
                         </div>
                     </div>
@@ -111,54 +111,62 @@
                         <div class="form-group" >
                             <label class="col-md-2 control-label"  >Descripcion:</label>
                             <div class="col-md-10 " >
-                                <textarea name="descripcion" id="descripcion" class="form-control" > </textarea>
+                                <textarea name="descripcion_equipo" id="descripcion_equipo" class="form-control" > </textarea>
                             </div>                           
                         </div>
                     </div>   
                 </div>
 
-                <div class="row ">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row"><!-- Formulario del Equipo -->
+    <div class="col-md-12">
+        <div class="box box-success">
+            <div class="box-header">
+                <i class="fa fa-cogs"></i>
+                <h3 class="box-title">Informacion Accesorios</h3>
+            </div>
+            <div class="box-body">
+                <div class="row row_separar">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="col-md-3 control-label">Accesorios: </label>                            
                             <div class="input-group ">
-                                <select class="form-control" id="cargo" name="cargo" >
-                                    <option value="" >Seleccione Accesorio</option>
-                                    <?php /*
-                                        foreach ($cargo->result() as $datos ) {
-                                            echo "<option value='".$datos->car_id."'>".$datos->car_descripcion."</option>";
-                                        } */
+                                <select class="form-control" id="nuevo_accesorio" name="nuevo_accesorio" >
+                                    <option value="" >Seleccione Accesorio...</option>
+                                    <?php 
+                                        foreach ($pieza->result() as $datos ) {
+                                            echo "<option value='".$datos->pie_id."'>".$datos->pie_descripcion."</option>";
+                                        } 
                                     ?>
                                 </select>
                                 <span class="input-group-btn">
-                                    <button class="btn btn-info btn-flat" type="button" id="add_personal">+</button>
+                                    <button class="btn btn-info btn-flat" type="button" id="sel_personal" onclick="sel_accesorio()">Add</button>
                                 </span>
                             </div>
                         </div>                         
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group" >
+                            <label class="col-md-2 control-label"  >Observacion:</label>
+                            <div class="col-md-10 " >
+                                <textarea name="nuevo_accesorio_descripcion" id="nuevo_accesorio_descripcion" class="form-control" > </textarea>
+                            </div>                           
+                        </div>
+                    </div>  
                      
                 </div>
                 <div class="row ">
                     <div class="col-md-8">
-                        <table class="table table-bordered">
+                        <table id="Table_accesorios" class="table table-bordered">
                             <tr>
-                                <th style="width: 10px">#</th>
                                 <th>Accesorio</th>
-                                <th>Tipo</th>
-                                <th style="width: 40px">Cantidad</th>
-                            </tr>
-                            <tr>
-                                <td>1.</td>
-                                <td>Accesorio 1</td>
-                                <td>Tipo 1</td>
-                                <td><span class="badge bg-red">55%</span></td>
-                            </tr>
-                            <tr>
-                                <td>2.</td>
-                                <td>Accesorio 2</td>
-                                <td>Tipo 2</td>
-                                <td><span class="badge bg-yellow">70%</span></td>
-                            </tr>
+                                <th>Observacion</th>
+                                <th style="width: 40px">Eliminar</th>
+                            </tr>                            
                         </table>                    
                     </div>
                 </div>
@@ -172,45 +180,38 @@
     <div class="col-md-11">
         <div class="box box-danger">
             <div class="box-header">
-                <i class="fa fa-users"></i>
+                <i class="fa fa-ban"></i>
                 <h3 class="box-title">Problema(s)</h3>
             </div>
             <div class="box-body">
                 <div class="row row_separar" >
                     <div class="col-md-6">
                         <div class="form-group" >
-                            <label class="col-md-3 control-label">Tipo: </label>
+                            <label class="col-md-3 control-label">Categoria: </label>
                             <div class="input-group ">
-                                <select class="form-control" id="cargo" name="cargo" >
-                                    <option value="" >Seleccione Tipo problema</option>
-                                    <?php /*
-                                        foreach ($cargo->result() as $datos ) {
-                                            echo "<option value='".$datos->car_id."'>".$datos->car_descripcion."</option>";
-                                        } */
+                                <select class="form-control" id="nuevo_categoria_problema" name="nuevo_categoria_problema" >
+                                    <option value="" >Seleccione categoria problema</option>
+                                    <?php 
+                                        foreach ($categoria_problema->result() as $datos ) {
+                                            echo "<option value='".$datos->catpro_id."'>".$datos->catpro_descripcion."</option>";
+                                        } 
                                     ?>
                                 </select>
                                 <span class="input-group-btn">
-                                    <button class="btn btn-info btn-flat" type="button" id="add_personal">+</button>
+                                    <button class="btn btn-info btn-flat" type="button" id="add_personal" onclick="sel_problema()">Add</button>
                                 </span>
                             </div>
                         </div>
                         <div class="form-group" >
-                            <label class="col-md-2 control-label"  >Descripcion:</label>
+                            <label class="col-md-2 control-label"  >Observacion:</label>
                             <div class="col-md-10 " >
-                                <textarea name="descripcion_problema" id="descripcion_problema" class="form-control" > </textarea>
+                                <textarea name="nuevo_descripcion_problema" id="nuevo_descripcion_problema" class="form-control" > </textarea>
                             </div>  
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="callout callout-danger">
-                                <h4>Problema 1</h4>
-                                <p>el tipo de problema </p>
-                            </div>
-                            <div class="callout callout-danger">
-                                <h4>Problema 2</h4>
-                                <p>el tipo de problema</p>
-                            </div>
+                        <div id="lista_problemas" class="form-group">
+                            
                         </div>                     
                     </div>
 
@@ -220,7 +221,8 @@
         </div>
     </div>
 </div>
-<button class="btn btn-info btn-flat" type="submit">Guardar</button>
+<button class="btn btn-info btn-flat" type="button" id="submit_form_servicio">Guardar</button>
+<button class="btn btn-info btn-flat" onclick="prueba()" type="button">prueba</button>
 </form>
 
 <!---MODALS -->
@@ -286,7 +288,7 @@
                 </div>
                 <div class="modal-footer clearfix">
                     <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
-                    <button type="button" id='submit_form' class="btn btn-primary pull-left"><i class="fa fa-check"></i> Guardar</button>
+                    <button type="button" id='submit_form_cliente' class="btn btn-primary pull-left"><i class="fa fa-check"></i> Guardar</button>
                 </div>
             </form>
         </div><!-- /.modal-content -->
@@ -317,7 +319,7 @@
                 </div>
                 <div class="modal-footer clearfix">
                     <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
-                    <button type="button" id='submit_form' class="btn btn-primary pull-left"><i class="fa fa-check"></i> Guardar</button>
+                    <button type="button" id='submit_form_tipo_equipo' class="btn btn-primary pull-left"><i class="fa fa-check"></i> Guardar</button>
                 </div>
             </form>
         </div><!-- /.modal-content -->
@@ -347,7 +349,7 @@
                 </div>
                 <div class="modal-footer clearfix">
                     <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
-                    <button type="button" id='submit_form' class="btn btn-primary pull-left"><i class="fa fa-check"></i> Guardar</button>
+                    <button type="button" id='submit_form_marca' class="btn btn-primary pull-left"><i class="fa fa-check"></i> Guardar</button>
                 </div>
             </form>
         </div><!-- /.modal-content -->

@@ -36,9 +36,9 @@ $(document).ready(function() {
             HTML = HTML + '<td>'+datos[i].cli_email+'</td>';
             var id_c = datos[i].cli_id;
             var n = datos[i].cli_nombre;
-            var d = datos[i].cli_dni
-            HTML = HTML + '<td><a style="margin-right:4px" href="javascript:void(0)" '+
-                        ' onclick="sel_cliente(\'' + id_c + '\',\'' + n + '\'' + d + '\')" class="btn btn-success">Add </a>';
+            var d = datos[i].cli_dni;
+            HTML = HTML + '<td><a style="margin-right:4px" href="javascript:void(0)" '+ 
+                        ' onclick="sel_cliente(\'' + id_c + '\',\'' + n + '\',\'' + d + '\')" class="btn btn-success">Add </a>';
             HTML = HTML + '</td>';
             HTML = HTML + '</tr>';
         }
@@ -50,7 +50,93 @@ $(document).ready(function() {
         }, 'json');
     }
 
+
+    $('#submit_form_tipo_equipo').on('click', function () {        //Enviar los datos del modal-form a guardar en el controlador
+        var campos_form = ["abreviatura","descripcion"];//campos que queremos que se validen
+        if(!validar_form(campos_form)){
+            return false;            
+        }
+
+        id = $("#id").val();
+        descripcion = $("#descripcion").val();
+        abreviatura = $("#abreviatura").val();
+        
+        $.post(base_url+"tipo_equipo/guardar",{id:id,descripcion:descripcion,abreviatura:abreviatura},function(valor){
+            if(!isNaN(valor)){
+                alert('Guardado exitoso');
+                
+                $("#modal_tipo_equipo_agregar").modal('hide');
+            }else{
+                alert('guardar error:'+valor);
+            }
+        });
+        
+    } );
+
+    $('#submit_form_marca').on('click', function () {        //Enviar los datos del modal-form a guardar en el controlador
+        var campos_form = ["abreviatura","descripcion"];//campos que queremos que se validen
+        if(!validar_form(campos_form)){
+            return false;            
+        }
+
+        id = $("#id").val();
+        descripcion = $("#descripcion").val();
+        abreviatura = $("#abreviatura").val();
+        
+        $.post(base_url+"marca/guardar",{id:id,descripcion:descripcion,abreviatura:abreviatura},function(valor){
+            
+            if(!isNaN(valor)){
+                alert('Guardado exitoso');
+                
+                $("#modal_marca_agregar").modal('hide');
+            }else{
+                alert('guardar error:'+valor);
+            }
+        });
+        
+    } );
+
+    $('#submit_form_servicio').on('click', function () {        //Enviar los datos del modal-form a guardar en el controlador
+        var campos_form = ["nombre_cliente","tipo_equipo","marca_equipo","modelo_equipo"];//campos que queremos que se validen
+        
+        if(!validar_form(campos_form)){
+            return false;            
+        }
+        if($(".categoria_problema").length<=0){
+            alert("Agrege un problema ");
+            return false;
+        }
+
+        cli = $("#id").val();
+        t_equi = $("#tipo_equipo").val();
+        mar = $("#marca_equipo").val();
+        mod = $("#modelo_equipo").val();
+        des = $("#descripcion_equipo").val();
+        
+        $.post(base_url+"servicio/guardar",{cli:cli,t_equi:t_equi,mar:mar,mod:mod,des:des},function(valor){
+            if(!isNaN(valor)){
+                alert('Guardado exitoso');
+                
+                $("#modal_tipo_equipo_agregar").modal('hide');
+            }else{
+                alert('guardar error:'+valor);
+            }
+        });
+        
+    } );
+
     
+    $(".delete").live('click', function() { 
+        alert('Eliminando!');
+        var i = $(this).parent().parent().index();
+        $("#Table_accesorios tr:eq(" + i + ")").remove();
+    });
+
+    $(".delete_problema").live('click', function() { 
+        alert('Eliminando!');
+        var i = $(this).parent().index();
+        $("#lista_problemas div:eq(" + i + ")").remove();
+    });    
 
 
 } );
@@ -61,4 +147,76 @@ $(document).ready(function() {
         $("#nombre_cliente").val(n+' DNI:'+d);
         $('#modal_cliente_buscar').modal('hide');    
         $("#tipo_equipo").focus();
+    }
+
+    function sel_accesorio() {
+    
+        var i_acc=$("#nuevo_accesorio").val();
+        var n_acc=$( "#nuevo_accesorio option:selected" ).text();
+        var o_acc=$("#nuevo_accesorio_descripcion").val();
+        
+        if (i_acc=='') {
+            return false;
+        }else if($(".id_accesorio[value=" + i_acc + "]").length){
+            alert("Ya ingresado ");
+            return false;
+        }
+
+        var html = '<tr class="row_tmp">';
+            html += '<td>';
+            html += '   <input type="hidden" name="id_accesorio[]" class="id_accesorio" value="' + i_acc+ '" />' + n_acc;
+            html += '</td>';
+            html += '<td>';
+            html += '   <input type="hidden" name="observacion_accesorio[]" value="' + o_acc  + '" /> ' + o_acc;
+            html += '</td>';
+            html += '<td>';
+            html += '    <a class="btn btn-danger delete"><i class="fa fa-trash"></i></a>';
+            html += '</td>';
+            html += '</tr>';
+
+            $("#Table_accesorios").append(html);
+            limpia_accesorio();
+        
+    }
+
+    function sel_problema() {
+        var i_cp=$("#nuevo_categoria_problema").val();
+        var n_cp=$("#nuevo_categoria_problema option:selected" ).text();
+        var o_cp=$("#nuevo_descripcion_problema").val();
+
+        if (i_cp=='') {
+            return false;
+        }else if($(".categoria_problema[value=" + i_cp + "]").length){
+            alert("Ya ingresado ");
+            return false;
+        }
+        
+         var html = '<div class="callout callout-danger">';
+            html += '<input type="hidden" name="categoria_problema" class="categoria_problema" value="'+i_cp+'"">';
+            html += '<input type="hidden" name="descripcion_problema[]" class="descripcion_problema" value="'+o_cp+'"">';
+            html += '<h4>'+n_cp+'</h4>';
+            html += '<p>'+o_cp+'</p>';
+            html += '<a class="btn btn-danger delete_problema"><i class="fa fa-trash"></i></a>';            
+            html += '</div>';
+
+        $("#lista_problemas").append(html);
+        limpia_problema();
+    }
+
+    function prueba(){
+        var elementos =$(".categoria_problema");
+ 
+        for(var i=0; i<elementos.length; i++) {
+          alert(" Elemento: " + elementos[i].value );
+        }
+    }
+
+    function limpia_accesorio(){
+        $("#nuevo_accesorio").val('');
+        $("#nuevo_accesorio_descripcion").val('');
+    }
+
+    function limpia_problema(){
+        $("#nuevo_categoria_problema").val('');
+        $("#nuevo_descripcion_problema").val('');
     }
