@@ -13,15 +13,20 @@
             return $query;            
         }
 
+        function parametros_nueva_servicio(){
+            $sql="SELECT max(ser_id + 1) as num_serv FROM servicio ";  
+            $query=$this->db->query($sql);      
+            return $query;            
+        }
+
         function crear($data){
-            $datos=array('ser_codigo' => $data['dni'],
-                        'ser_tipo_equipo' => $data['nombre'],
-                        'ser_marca' => $data['direccion'],
-                        'ser_modelo' => $data['telefono'],
-                        'ser_descripcion' => $data['email'],
-                        'ser_estado_recepcion' => $data['estado_recepcion'],
-                        'ser_estado_servicio' => 1,
-                        'ser_fecha_recepcion' => $data['fecha_recepcion'] );
+            $datos=array('ser_cliente' => $data['ser_cliente'],
+                        'ser_codigo' => $data['ser_codigo'],
+                        'ser_tipo_equipo' => $data['ser_tipo_equipo'],
+                        'ser_marca' => $data['ser_marca'],
+                        'ser_modelo' => $data['ser_modelo'],
+                        'ser_descripcion' => $data['ser_descripcion'],
+                        'ser_fecha_recepcion' => $data['ser_fecha_recepcion'] );
             if($this->db->insert('servicio',$datos)){
                  $query=0;
             }else{

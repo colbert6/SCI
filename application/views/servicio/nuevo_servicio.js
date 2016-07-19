@@ -107,13 +107,15 @@ $(document).ready(function() {
             return false;
         }
 
-        cli = $("#id").val();
+        cli = $("#id_cliente").val();
+        dni = $("#dni_cliente").val();
         t_equi = $("#tipo_equipo").val();
         mar = $("#marca_equipo").val();
         mod = $("#modelo_equipo").val();
         des = $("#descripcion_equipo").val();
+        fec = $("#fecha").val();
         
-        $.post(base_url+"servicio/guardar",{cli:cli,t_equi:t_equi,mar:mar,mod:mod,des:des},function(valor){
+        $.post(base_url+"servicio/guardar",{cli:cli,dni:dni,t_equi:t_equi,mar:mar,mod:mod,des:des,fec:fec},function(valor){
             if(!isNaN(valor)){
                 alert('Guardado exitoso');
                 
@@ -144,6 +146,7 @@ $(document).ready(function() {
     function sel_cliente(id_c,n,d) {
     
         $("#id_cliente").val(id_c);
+        $("#dni_cliente").val(d);
         $("#nombre_cliente").val(n+' DNI:'+d);
         $('#modal_cliente_buscar').modal('hide');    
         $("#tipo_equipo").focus();

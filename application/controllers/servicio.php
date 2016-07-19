@@ -44,29 +44,25 @@
 
         public function guardar()
         {   
-            echo "<pre>";print_r($_POST);exit();
+            
+            if(!empty($_POST['guardar'])) {
 
-            /*$data_servicio= array ( 'ser_cliente'=> $this->input->post('id_cliente'),
-                                'ser_fecha_recepcion'=> $this->input->post('fecha'),
-                                'abreviatura'=> $this->input->post('tipo_equipo')
+                $data=$this->servicio_model->parametros_nueva_servicio()->result_array();
+                if($data[0]['num_serv']==''){
+                   $data[0]['num_serv']=1;
+                }
 
-
-
-
-
+                $data_servicio= array ( 'ser_cliente'=> $this->input->post('cli'),
+                                'ser_codigo'=>$this->input->post('dni')." - ". $data[0]['num_serv'],
+                                'ser_fecha_recepcion'=> $this->input->post('fec'),
+                                'ser_tipo_equipo'=> $this->input->post('t_equi'),
+                                'ser_marca'=> $this->input->post('mar'),
+                                'ser_modelo'=> $this->input->post('mod'),
+                                'ser_descripcion'=> $this->input->post('des'),
                                 );
-
-          
-                
-                $guardar=$this->cargo_model->editar($data);   
-
-            }else{
-                $data= array (  'descripcion'=> $this->input->post('descripcion'),
-                                'abreviatura'=> $this->input->post('abreviatura') );
-                $guardar=$this->cargo_model->crear($data);
-                
-            } 
-            echo json_encode($guardar); */ 
+                $guardar=$this->servicio_model->crear($data_servicio);   
+            }
+            echo json_encode($guardar);
         }
      
         public function eliminar()

@@ -34,6 +34,7 @@
                                                            
                             <div class="col-md-9" style="padding-right: 0px;">
                                 <input name="id_cliente" id="id_cliente" type="hidden">
+                                <input name="dni_cliente" id="dni_cliente" type="hidden">
                                 <input name="nombre_cliente" id="nombre_cliente" class="form-control" readonly="true" placeholder="Cliente">
                             </div>
                             <a class="btn btn-success k-button" id="cliente_buscar" data-toggle="modal" data-target="#modal_cliente_buscar">Buscar</a>
