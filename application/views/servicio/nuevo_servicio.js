@@ -117,9 +117,35 @@ $(document).ready(function() {
         
         $.post(base_url+"servicio/guardar",{cli:cli,dni:dni,t_equi:t_equi,mar:mar,mod:mod,des:des,fec:fec},function(valor){
             if(!isNaN(valor)){
-                alert('Guardado exitoso');
+                var ser=parseInt(valor); 
+                var id_accesorio =$(".id_accesorio"); 
+                var obs_accessorio =$(".observacion_accesorio"); 
+                for(var i=0; i<id_accesorio.length; i++) {
+                    $.post(base_url+"servicio/guardar_accesorios",{ser:ser,acc:id_accesorio[i].value,obs:obs_accessorio[i].value},function(valor_a){
+                        if(!isNaN(valor_a)){                            
+                            alert('Guardado acces exitoso');                
+                        }else{
+                            alert('guardar acces error:'+valor_a);
+                        }
+                       
+                    });
+                }
+
+                var categoria_problema =$(".categoria_problema"); 
+                var descripcion_problema =$(".descripcion_problema"); 
+                for(var i=0; i<categoria_problema.length; i++) {
+                    $.post(base_url+"servicio/guardar_problemas",{ser:ser,cat:categoria_problema[i].value,obs:descripcion_problema[i].value,fec:fec},function(valor_p){
+                        if(!isNaN(valor_p)){                            
+                            alert('Guardado problema exitoso');                
+                        }else{
+                            alert('guardar problema error:'+valor_p);
+                        }
+                    });
+                }
+
+                $("#modal_confirmacion").modal({show: true});
+                $('#cod_servicio').html(dni+' -'+valor);
                 
-                $("#modal_tipo_equipo_agregar").modal('hide');
             }else{
                 alert('guardar error:'+valor);
             }
@@ -127,14 +153,17 @@ $(document).ready(function() {
         
     } );
 
+    $('#aceptar_confirmacion').on('click', function () {   //Enviar los datos del modal-form a eliminar en el controlador
+       window.location.href = base_url+"servicio/nuevo_servicio";
+    } );
     
-    $(".delete").live('click', function() { 
+    $(".delete").live('click', function() { //eliminar accesorios
         alert('Eliminando!');
         var i = $(this).parent().parent().index();
         $("#Table_accesorios tr:eq(" + i + ")").remove();
     });
 
-    $(".delete_problema").live('click', function() { 
+    $(".delete_problema").live('click', function() { //eliminar problemas
         alert('Eliminando!');
         var i = $(this).parent().index();
         $("#lista_problemas div:eq(" + i + ")").remove();
@@ -170,7 +199,7 @@ $(document).ready(function() {
             html += '   <input type="hidden" name="id_accesorio[]" class="id_accesorio" value="' + i_acc+ '" />' + n_acc;
             html += '</td>';
             html += '<td>';
-            html += '   <input type="hidden" name="observacion_accesorio[]" value="' + o_acc  + '" /> ' + o_acc;
+            html += '   <input type="hidden" name="observacion_accesorio[]" class="observacion_accesorio" value="' + o_acc  + '" /> ' + o_acc;
             html += '</td>';
             html += '<td>';
             html += '    <a class="btn btn-danger delete"><i class="fa fa-trash"></i></a>';

@@ -9,7 +9,8 @@
             $this->load->model('tipo_equipo_model');
             $this->load->model('marca_model');
             $this->load->model('pieza_model');
-            $this->load->model('categoria_problema_model');             
+            $this->load->model('categoria_problema_model');
+             $this->load->model('problema_model');             
         }
         
         public function lista_servicio()
@@ -26,11 +27,7 @@
             $dato_header= array ( 'titulo'=> 'Nuevo Servicio');
             $dato_foother= array ( 'add_servicio'=> 'si');
 
-            //$data=$this->venta_model->parametros_nueva_servicio()->result_array();
-
-            //$parametro=array('num_documento'=>'Boleta - 00'.$data[0]['num_doc'],
-            //                    'fecha'=>date('Y-m-d'));
-
+            
             $parametro=array('tipo_equipo'=>$this->tipo_equipo_model->select(),
                                 'marca'=>$this->marca_model->select(),
                                 'pieza'=>$this->pieza_model->select(),
@@ -45,7 +42,7 @@
         public function guardar()
         {   
             
-            if(!empty($_POST['guardar'])) {
+            if(!empty($_POST['dni']) && !empty($_POST['cli']) ) {
 
                 $data=$this->servicio_model->parametros_nueva_servicio()->result_array();
                 if($data[0]['num_serv']==''){
@@ -53,14 +50,46 @@
                 }
 
                 $data_servicio= array ( 'ser_cliente'=> $this->input->post('cli'),
-                                'ser_codigo'=>$this->input->post('dni')." - ". $data[0]['num_serv'],
+                                'ser_codigo'=>$this->input->post('dni')."-". $data[0]['num_serv'],
                                 'ser_fecha_recepcion'=> $this->input->post('fec'),
                                 'ser_tipo_equipo'=> $this->input->post('t_equi'),
                                 'ser_marca'=> $this->input->post('mar'),
                                 'ser_modelo'=> $this->input->post('mod'),
-                                'ser_descripcion'=> $this->input->post('des'),
-                                );
-                $guardar=$this->servicio_model->crear($data_servicio);   
+                                'ser_descripcion'=> $this->input->post('des')   );
+                $guardar=$this->servicio_model->crear($data_servicio); 
+                if(is_numeric($guardar)){
+                    $guardar=(int)$data[0]['num_serv'];
+                }  
+            }
+            echo json_encode( $guardar);
+        }
+
+        public function guardar_accesorios()
+        {   
+            
+            if(!empty($_POST['acc']) ) {
+
+                
+
+                $data_servicio= array ( 'ser_id'=>  $this->input->post('ser'),
+                                'pie_id'=>$this->input->post('acc'),
+                                'acc_observacion'=> $this->input->post('obs')  );
+                $guardar=$this->servicio_model->crear_accesorio($data_servicio);               
+            }
+            echo json_encode($guardar);
+        }
+
+        public function guardar_problemas()
+        {   
+            
+            if(!empty($_POST['cat']) ) {
+                $data=$this->servicio_model->parametros_nueva_servicio()->result_array();
+                
+                $data_servicio= array ( 'ser_id'=> $this->input->post('ser'),
+                                'catpro_id'=>$this->input->post('cat'),
+                                'pro_descripcion'=> $this->input->post('obs'),
+                                'pro_fecha'=> $this->input->post('fec')  );
+                $guardar=$this->problema_model->crear($data_servicio);               
             }
             echo json_encode($guardar);
         }

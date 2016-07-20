@@ -35,6 +35,18 @@
             return $query;            
         }
 
+        function crear_accesorio($data){
+            $datos=array('ser_id' => $data['ser_id'],
+                        'pie_id' => $data['pie_id'],
+                        'acc_observacion' => $data['acc_observacion'] );
+            if($this->db->insert('accesorio',$datos)){
+                 $query=0;
+            }else{
+                 $query=$this->db->_error_message();
+            }
+            return $query;            
+        }
+
         function editar($data){
             $datos=array(   'ser_codigo' => $data['dni'],
                         'ser_tipo_equipo' => $data['nombre'],

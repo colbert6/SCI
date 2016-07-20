@@ -33,6 +33,14 @@
             } 
             echo json_encode($guardar);   
         }
+
+        public function prueba()
+        {   
+            
+                $consulta=$this->cargo_model->select();
+                
+            echo json_encode($consulta->result());   
+        }
      
         public function eliminar()
         {            

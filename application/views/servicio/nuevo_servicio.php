@@ -178,7 +178,7 @@
 </div>
 
 <div class="row"><!-- Formulario de la ruta Viaje -->
-    <div class="col-md-11">
+    <div class="col-md-12">
         <div class="box box-danger">
             <div class="box-header">
                 <i class="fa fa-ban"></i>
@@ -356,4 +356,27 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal --> 
-   
+
+<div class="modal fade" id="modal_confirmacion" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><i class="fa fa-check-circle"></i> Guardado Exitoso </h4>
+            </div>
+            <form role="form" action="" method="post">
+                <input type="hidden" id='id_dato_eliminar'></input>
+               
+                <div class="modal-body" >
+                    <div class="alert alert-success alert-dismissable">
+                        <i class="fa fa-check"></i>
+                        <h4>Se genero un nuevo servicio, Codigo [ </h4><h4 id="cod_servicio"></h4> <h4>]</h4>
+                    </div>
+                </div>
+                <div class="modal-footer clearfix">
+                     <button type="button" id="aceptar_confirmacion" class="btn btn-primary pull-left"><i class="fa fa-check"></i> Aceptar</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->                   
