@@ -13,8 +13,24 @@
             return $query;            
         }
 
+        function select_all(){ 
+            $sql="SELECT ser.*,cli.*,t_eq.*,mar.*
+                    FROM servicio as ser,cliente as cli,tipo_equipo as t_eq, marca as mar 
+                    WHERE ser.ser_cliente=cli.cli_id and ser.ser_tipo_equipo=t_eq.tipequ_id and ser.ser_marca=mar.mar_id  ";  
+            $query=$this->db->query($sql);      
+            return $query;            
+        }
+
         function parametros_nueva_servicio(){
             $sql="SELECT max(ser_id + 1) as num_serv FROM servicio ";  
+            $query=$this->db->query($sql);      
+            return $query;            
+        }
+
+        function select_accesorios($id){ 
+            $sql="SELECT acc.*,pie.* 
+                    FROM accesorio as acc,pieza as pie 
+                    WHERE acc.pie_id=pie.pie_id and acc.ser_id=".$id;  
             $query=$this->db->query($sql);      
             return $query;            
         }

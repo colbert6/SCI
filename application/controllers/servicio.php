@@ -102,7 +102,7 @@
 
         public function cargar_datos($tabla='servicio')
         {   
-            $consulta=$this->servicio_model->select($tabla);
+            $consulta=$this->servicio_model->select_all($tabla);
             $result= array("draw"=>1,
                 "recordsTotal"=>$consulta->num_rows(),
                  "recordsFiltered"=>$consulta->num_rows(),
@@ -111,6 +111,23 @@
             //echo "<pre>";
             //print_r($nuevo);exit();
             echo json_encode($result);
+        }
+
+        public function cargar_adicionales($id)
+        {   
+            if(!empty($_POST['accesorios'])){
+                $consulta=$this->servicio_model->select_accesorios($id);  
+            }else if(!empty($_POST['problemas'])){
+                $consulta=$this->problema_model->select_serv_problema($id);
+            }else if(!empty($_POST['soluciones'])){
+                
+            }else if(!empty($_POST['repuestos'])){
+                
+            } 
+            $consulta=$this->servicio_model->select_accesorios($id);
+            $result= $consulta->result();
+            echo json_encode($result);
+            
         }
 
     }

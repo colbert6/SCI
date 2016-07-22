@@ -1,21 +1,4 @@
 
-<style type="text/css">
-.option_oculta{
-    display: none;
-}
-
-.option_utilizada{
-    display: none;
-}
-
-.quitar_paddin_rigth{
-    padding-right: 0px ;
-}
-.row_separar{
-    padding-bottom: 10px ;
-}
-
-</style>
 
 
 <form role="form" action="" method="post">

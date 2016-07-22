@@ -1,6 +1,8 @@
 $(document).ready(function() {
     var base_url = $("#base_url").val();
+    
     var table =$('#tab').DataTable( {
+    
 
         "processing": true,
         "ajax": {
@@ -8,15 +10,32 @@ $(document).ready(function() {
             "type": "POST"
         },
         "columns": [
-            { "data": "ser_id" },
+            { "data": "ser_id"},
+            { "data": "cli_nombre" },
             { "data": "ser_codigo" },
-            { "data": "ser_tipo_equipo" },
-            { "data": "ser_marca" }, 
+            { "data": "tipequ_abreviatura" },
+            { "data": "mar_abreviatura" }, 
             { "data": "ser_modelo" },
-            { "data": "ser_descripcion" }, 
-            { "data": "ser_estado_recepcion" },
             { "data": "ser_estado_servicio" },
-            { "data": "ser_fecha_recepcion" },
+            { "data": "ser_fecha_recepcion" },             
+            {
+                "className":      'detallar-data',
+                "orderable":      false,
+                "data":           null,
+                "defaultContent": ''
+            },
+            {
+                "className":      'solucionar-data',
+                "orderable":      false,
+                "data":           null,
+                "defaultContent": ''
+            },
+            {
+                "className":      'finalizar-data',
+                "orderable":      false,
+                "data":           null,
+                "defaultContent": ''
+            }
         ],
         "bPaginate": true,
         "bLengthChange": true,
@@ -53,15 +72,52 @@ $(document).ready(function() {
         'aLengthMenu': [[5, 10, 20], [5, 10, 20]]
     } );
 
-/*    $('#tab tbody').on('click', 'td.editar-data', function () { //Agregar los datos correspondientes al modal-form
+    $('#tab tbody').on('click', 'td.detallar-data', function () { //Agregar los datos correspondientes al modal-form
+        
         var tr = $(this).closest('tr');
         var row = table.row( tr );
-        $("#id").val(row.data().car_id);
-        $("#descripcion").val(row.data().car_descripcion);
-        $("#abreviatura").val(row.data().car_abreviatura);
-        $("#modal_form").modal({show: true});
+        
+        $("#codigo_servicio").val(row.data().ser_codigo);
+        $("#detalle_servicio").removeClass('no_visible');
+        $("#tabla_servicios").addClass('no_visible');
+
+        $("#nombre_cliente").val(row.data().cli_nombre);
+        $("#fecha").val(row.data().ser_fecha_recepcion);
+
+        $("#tipo_equipo").val(row.data().tipequ_descripcion);
+        $("#marca_equipo").val(row.data().mar_descripcion);
+        $("#modelo_equipo").val(row.data().ser_modelo);
+        $("#descripcion_equipo").val(row.data().ser_descripcion);
+
+        $.post(base_url+"servicio/cargar_adicionales/"+row.data().ser_id,{accesorios:1},function(datos){            
+            var html ;
+            var data = JSON.parse(datos);
+            for (var i = 0; i < data.length; i++) {
+                html += '<tr class="row_tmp">';
+                html += '<td>'+ data[i].pie_nombre +'</td>';
+                html += '<td>'+ data[i].acc_observacion +'</td>';
+                html += '</tr>';                
+            }
+            $("#Table_accesorios").append(html);
+        });
+
+        $.post(base_url+"servicio/cargar_adicionales/"+row.data().ser_id,{problemas:1},function(datos){            
+            var html ;
+            var data = JSON.parse(datos);
+            for (var i = 0; i < data.length; i++) {
+            html += '<div class="callout callout-danger">';
+            html += '<h4>'+n_cp+'</h4>';
+            html += '<p>'+o_cp+'</p>';            
+            html += '</div>';                
+            }
+            $("#Table_accesorios").append(html);
+        });
+
+
+
     } );
 
+/*
     $('#tab tbody').on('click', 'td.eliminar-data', function () { //Agregar los datos correspondientes al modal-delete
         var tr = $(this).closest('tr');
         var row = table.row( tr );

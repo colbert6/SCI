@@ -14,6 +14,12 @@
             return $query;            
         }
 
+        function select_serv_problema(){
+            $sql="";
+            $query=$this->db->query($sql);      
+            return $query;            
+        }
+
         function crear($data){
             $datos=array('ser_id' => $data['ser_id'],
                         'catpro_id' => $data['catpro_id'],

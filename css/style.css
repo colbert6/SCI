@@ -13,3 +13,33 @@ td.eliminar-data {
     background: url("../img/eliminar.png") no-repeat center center;
     cursor: pointer;
 }
+td.detallar-data {
+    background: url("../img/detallar.png") no-repeat center center;
+    cursor: pointer;
+}
+td.solucionar-data {
+    background: url("../img/solucionar.png") no-repeat center center;
+    cursor: pointer;
+}
+td.finalizar-data {
+    background: url("../img/finalizar.png") no-repeat center center;
+    cursor: pointer;
+}
+
+.visible { display: block; }
+.no_visible { display: none; }
+
+.option_oculta{
+    display: none;
+}
+
+.option_utilizada{
+    display: none;
+}
+
+.quitar_paddin_rigth{
+    padding-right: 0px ;
+}
+.row_separar{
+    padding-bottom: 10px ;
+}
