@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  
-    class Servicio extends CI_Controller
+    class Solucion extends CI_Controller
     {   
         
         function __construct(){
@@ -12,6 +12,24 @@
             $this->load->model('categoria_problema_model');
              $this->load->model('problema_model');             
         }
+
+        public function nueva_solucion()
+        {   
+            $dato_header= array ( 'titulo'=> 'Soluciones');
+            $dato_foother= array ( 'add_solucion'=> 'so');
+
+            
+            $parametro=array('tipo_equipo'=>$this->tipo_equipo_model->select(),
+                                'marca'=>$this->marca_model->select(),
+                                'pieza'=>$this->pieza_model->select(),
+                                'categoria_problema'=>$this->categoria_problema_model->select(),
+                            'fecha'=>date('Y-m-d H:i:s'));
+
+            $this->load->view("/layout/header.php",$dato_header);
+            $this->load->view("/solucion/nueva_solucion.php",$parametro);
+            $this->load->view("/layout/foother_table.php",$dato_foother);
+        }
+
         
         public function lista_servicio()
         {   
@@ -22,22 +40,7 @@
             $this->load->view("/layout/foother_table.php");
         }
 
-        public function nuevo_servicio()
-        {   
-            $dato_header= array ( 'titulo'=> 'Nuevo Servicio');
-            $dato_foother= array ( 'add_servicio'=> 'si');
-
-            
-            $parametro=array('tipo_equipo'=>$this->tipo_equipo_model->select(),
-                                'marca'=>$this->marca_model->select(),
-                                'pieza'=>$this->pieza_model->select(),
-                                'categoria_problema'=>$this->categoria_problema_model->select(),
-                            'fecha'=>date('Y-m-d H:i:s'));
-
-            $this->load->view("/layout/header.php",$dato_header);
-            $this->load->view("/servicio/nuevo_servicio.php",$parametro);
-            $this->load->view("/layout/foother_table.php",$dato_foother);
-        }
+       
 
         public function guardar()
         {   
@@ -102,7 +105,7 @@
 
         public function cargar_datos($tabla='servicio')
         {   
-            $consulta=$this->servicio_model->select_all($tabla);
+            $consulta=$this->servicio_model->select($tabla);
             $result= array("draw"=>1,
                 "recordsTotal"=>$consulta->num_rows(),
                  "recordsFiltered"=>$consulta->num_rows(),
@@ -111,28 +114,6 @@
             //echo "<pre>";
             //print_r($nuevo);exit();
             echo json_encode($result);
-        }
-
-        public function cargar_adicionales($id)
-        {   
-            if(!empty($_POST['accesorios'])){
-                $consulta=$this->servicio_model->select_accesorios($id);  
-            }else if(!empty($_POST['problemas'])){
-                $consulta=$this->problema_model->select_serv_problema($id);
-            }else if(!empty($_POST['soluciones'])){
-                
-            }else if(!empty($_POST['repuestos'])){
-                
-            } 
-            $consulta=$this->servicio_model->select_accesorios($id);
-            $result= $consulta->result();
-            echo json_encode($result);
-       
-        public function cargar_datos_seleccion($tabla='servicio')
-        {   
-            $consulta=$this->servicio_model->select($tabla);
-            
-            echo json_encode($consulta->result());
         }
 
     }

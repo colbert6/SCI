@@ -112,7 +112,16 @@
                                 <li><a href="<?= base_url(); ?>servicio/lista_servicio"><i class="fa fa-angle-double-right"></i>Detalles</a></li>
                             </ul>
                         </li>
-                        
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-life-ring"></i> <span>Soluciones</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="<?= base_url(); ?>solucion/nueva_solucion"><i class="fa fa-angle-double-right"></i>Nuevo</a></li>
+                                <li><a href="<?= base_url(); ?>solucion/lista_solucion"><i class="fa fa-angle-double-right"></i>Detalles</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->

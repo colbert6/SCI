@@ -58,6 +58,13 @@
             echo json_encode($result);
         }
 
+        public function cargar_datos_seleccion($tabla='pieza')
+        {   
+            $consulta=$this->pieza_model->select($tabla);
+            
+            echo json_encode($consulta->result());
+        }
+
     }
  ?>
 

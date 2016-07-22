@@ -24,7 +24,9 @@
             <script src="<?= base_url(); ?>application/views/<?= $this->uri-> segment(1);?>/nuevo_servicio.js" type="text/javascript"></script>  
             
         <?php
-            }
+            }else if(isset ($add_solucion) && $add_solucion=='so'){?>
+            <script src="<?= base_url(); ?>application/views/<?= $this->uri-> segment(1);?>/nueva_solucion.js" type="text/javascript"></script>  
+        <?php    }
         ?>
 
     </body>
