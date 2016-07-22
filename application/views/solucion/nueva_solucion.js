@@ -11,6 +11,7 @@ $(document).ready(function() {
          buscarPersonal();
          //alert('as');
     } );
+
     /*$('#prs').on('click', function () {      //Limpiar los datos del modal-form
          alert("s");
          $("#modal_repuesto_buscar").modal({show: true});
@@ -93,40 +94,7 @@ $(document).ready(function() {
         }, 'json');
     }
 
-    function buscarRepuesto() {
-    $("#grillaRepuesto").html('<div class="page-header"><img src="'+base_url+'img/ajax-loader.gif" /></div>');
-    $.post(base_url + 'pieza/cargar_datos_seleccion', function(datos) {
-        var HTML = '<table id="table3" class="table table-bordered table-striped" width="100%">' +
-                '<thead>' +
-                '<tr>' +
-                '<th>ITEM</th>'+
-                '<th>NOMBRE</th>'+
-                '<th>DESCRIPCION</th>'+
-                '<th>Seleccionar</th>'+
-                '</tr>' +
-                '</thead>' +
-                '<tbody>';
-
-        for (var i = 0; i < datos.length; i++) {
-            HTML = HTML + '<tr>';
-            HTML = HTML + '<td>'+(i+1)+'</td>';
-            HTML = HTML + '<td>'+datos[i].pie_nombre+'</td>';
-            HTML = HTML + '<td>'+datos[i].pie_descripcion+'</td>';
-            var id_pieza = datos[i].pie_id;
-            var n = datos[i].pie_nombre;
-            var d = datos[i].pie_descripcion;
-            HTML = HTML + '<td><a style="margin-right:4px" href="javascript:void(0)" '+ 
-                        ' onclick="sel_repuesto(\'' + id_pieza + '\',\'' + n + '\',\'' + d + '\')" class="btn btn-success">Add </a>';
-            HTML = HTML + '</td>';
-            HTML = HTML + '</tr>';
-        }
-        
-        HTML = HTML + '</tbody></table>'
-        $("#grillaRepuesto").html(HTML);
-        $('#table3').dataTable();
-        
-        }, 'json');
-    }
+   
 
     $('#submit_form_tipo_equipo').on('click', function () {        //Enviar los datos del modal-form a guardar en el controlador
         var campos_form = ["abreviatura","descripcion"];//campos que queremos que se validen
@@ -312,7 +280,7 @@ $(document).ready(function() {
                 html += "</tr>";
                 html += "</table><br>";
                 html += "<button onclick='cargar();' class='btn btn-danger'><i class='fa fa-trash'>&nbsp;Solucion</i></button>";            
-                html += "<a class='btn btn-success' id='prs' data-toggle='modal' data-target='#modal_repuesto_buscar'><i class='fa fa-plus'>&nbsp;Agregar Repuestos</i></a>&nbsp;&nbsp;";            
+                html += "<a   onclick='buscarRepuesto();'class='btn btn-success' id='pieza_buscar' data-toggle='modal' data-target='#modal_repuesto_buscar'><i class='fa fa-plus'>&nbsp;Agregar Repuestos</i></a>&nbsp;&nbsp;";            
                 html += "<a class='btn btn-danger delete_soluciones'><i class='fa fa-trash'>&nbsp;Eliminar Solucion</i></a>";            
                 html += '</div>';
 
@@ -359,7 +327,42 @@ $(document).ready(function() {
 
 
 
+    function buscarRepuesto() {
+    alert('hola');
+    var base_url = $("#base_url").val();
+    $("#grillaRepuesto").html('<div class="page-header"><img src="'+base_url+'img/ajax-loader.gif" /></div>');
+    $.post(base_url + 'pieza/cargar_datos_seleccion', function(datos) {
+        var HTML = '<table id="table3" class="table table-bordered table-striped" width="100%">' +
+                '<thead>' +
+                '<tr>' +
+                '<th>ITEM</th>'+
+                '<th>NOMBRE</th>'+
+                '<th>DESCRIPCION</th>'+
+                '<th>Seleccionar</th>'+
+                '</tr>' +
+                '</thead>' +
+                '<tbody>';
 
+        for (var i = 0; i < datos.length; i++) {
+            HTML = HTML + '<tr>';
+            HTML = HTML + '<td>'+(i+1)+'</td>';
+            HTML = HTML + '<td>'+datos[i].pie_nombre+'</td>';
+            HTML = HTML + '<td>'+datos[i].pie_descripcion+'</td>';
+            var id_pieza = datos[i].pie_id;
+            var n = datos[i].pie_nombre;
+            var d = datos[i].pie_descripcion;
+            HTML = HTML + '<td><a style="margin-right:4px" href="javascript:void(0)" '+ 
+                        ' onclick="sel_repuesto(\'' + id_pieza + '\',\'' + n + '\',\'' + d + '\')" class="btn btn-success">Add </a>';
+            HTML = HTML + '</td>';
+            HTML = HTML + '</tr>';
+        }
+        
+        HTML = HTML + '</tbody></table>'
+        $("#grillaRepuesto").html(HTML);
+        $('#table3').dataTable();
+        
+        }, 'json');
+    }
 
 
 

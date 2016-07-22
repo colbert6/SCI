@@ -127,7 +127,7 @@
             $consulta=$this->servicio_model->select_accesorios($id);
             $result= $consulta->result();
             echo json_encode($result);
-       
+        }
         public function cargar_datos_seleccion($tabla='servicio')
         {   
             $consulta=$this->servicio_model->select($tabla);
