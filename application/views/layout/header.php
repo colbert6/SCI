@@ -91,14 +91,16 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="<?= base_url(); ?>cliente/"><i class="fa fa-angle-double-right"></i>Cliente</a></li>
-                                <li><a href="<?= base_url(); ?>pieza/"><i class="fa fa-angle-double-right"></i>Piezas</a></li>
+                                <li><a href="<?= base_url(); ?>cliente/"><i class="fa fa-angle-double-right"></i>Cliente</a></li>                                
                                 <li><a href="<?= base_url(); ?>tipo_pieza/"><i class="fa fa-angle-double-right"></i>Tipo Piezas</a></li>
+                                <li><a href="<?= base_url(); ?>pieza/"><i class="fa fa-angle-double-right"></i>Piezas</a></li>
                                 <li><a href="<?= base_url(); ?>cargo/"><i class="fa fa-angle-double-right"></i>Cargo</a></li>
+                                <li><a href="<?= base_url(); ?>personal/"><i class="fa fa-angle-double-right"></i>Personal</a></li>
                                 <li><a href="<?= base_url(); ?>tipo_equipo/"><i class="fa fa-angle-double-right"></i>Tipo Equipo</a></li>                                
-                                <li><a href="<?= base_url(); ?>usuario/"><i class="fa fa-angle-double-right"></i>Usuario</a></li>
-                                <li><a href="<?= base_url(); ?>marca/"><i class="fa fa-angle-double-right"></i>Marca</a></li>                                
-                                <li><a href="<?= base_url(); ?>categoria_problema/"><i class="fa fa-angle-double-right"></i>Categoria Problema</a></li>
+                                <li><a href="<?= base_url(); ?>marca/"><i class="fa fa-angle-double-right"></i>Marca</a></li>
+                                <li><a href="<?= base_url(); ?>categoria_problema/"><i class="fa fa-angle-double-right"></i>Categoria Problema</a></li> 
+                                <li><a href="<?= base_url(); ?>usuario/"><i class="fa fa-angle-double-right"></i>Usuario</a></li>                                                               
+                                
                             </ul>
                         </li>
 

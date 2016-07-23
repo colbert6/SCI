@@ -4,14 +4,14 @@ $(document).ready(function() {
 
         "processing": true,
         "ajax": {
-            "url": base_url+"cargo/cargar_datos/",
+            "url": base_url+"personal/cargar_datos/",
             "type": "POST"
         },
         "columns": [
-            { "data": "car_id" },
+            { "data": "per_id" },
             { "data": "car_descripcion" },
-            { "data": "car_abreviatura" },
-            { "data": "car_estado" },  
+            { "data": "per_nombre" },
+            { "data": "per_dni" },  
             {
                 "className":      'editar-data',
                 "orderable":      false,
@@ -62,16 +62,19 @@ $(document).ready(function() {
     
     $('#nuevo_modal').on('click', function () {      //Limpiar los datos del modal-form
         $("#id").val('');
-        $("#descripcion").val('');
-        $("#abreviatura").val('');
+        $("#nombre").val('');
+        $("#dni").val('');
+        $("#cargo").val('')
+
     } );
 
     $('#tab tbody').on('click', 'td.editar-data', function () { //Agregar los datos correspondientes al modal-form
         var tr = $(this).closest('tr');
         var row = table.row( tr );
-        $("#id").val(row.data().car_id);
-        $("#descripcion").val(row.data().car_descripcion);
-        $("#abreviatura").val(row.data().car_abreviatura);
+        $("#id").val(row.data().per_id);
+        $("#nombre").val(row.data().per_nombre);
+        $("#dni").val(row.data().per_dni);
+        $("#cargo").val(row.data().car_id);
         $("#modal_form").modal({show: true});
     } );
 
@@ -79,8 +82,8 @@ $(document).ready(function() {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
         $("#modal_delete").modal({show: true});
-        $("#id_dato_eliminar").val(row.data().car_id);
-        $('#desc_dato_eliminar').html(row.data().car_descripcion);
+        $("#id_dato_eliminar").val(row.data().per_id);
+        $('#desc_dato_eliminar').html(row.data().per_nombre);
 
     } );
 
@@ -91,10 +94,11 @@ $(document).ready(function() {
         }
 
         id = $("#id").val();
-        descripcion = $("#descripcion").val();
-        abreviatura = $("#abreviatura").val();
+        nombre = $("#nombre").val();
+        dni = $("#dni").val();
+        cargo = $("#cargo").val();
         
-        $.post(base_url+"cargo/guardar",{id:id,descripcion:descripcion,abreviatura:abreviatura},function(valor){
+        $.post(base_url+"personal/guardar",{id:id,nombre:nombre,dni:dni,cargo:cargo},function(valor){
             if(!isNaN(valor)){
                 alert('Guardado exitoso');
                 table.ajax.reload(null, false);
@@ -108,7 +112,7 @@ $(document).ready(function() {
 
     $('#delete_click').on('click', function () {   //Enviar los datos del modal-form a eliminar en el controlador
         var id = $("#id_dato_eliminar").val();
-        $.post(base_url+"cargo/eliminar",{id:id},function(valor){
+        $.post(base_url+"personal/eliminar",{id:id},function(valor){
             if(!isNaN(valor)){
                 alert('Dato eliminado');
                 table.ajax.reload(null, false);

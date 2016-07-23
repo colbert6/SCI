@@ -77,10 +77,11 @@ $(document).ready(function() {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
         
-        $("#codigo_servicio").val(row.data().ser_codigo);
+        
         $("#detalle_servicio").removeClass('no_visible');
         $("#tabla_servicios").addClass('no_visible');
 
+        $("#codigo_servicio").val(row.data().ser_codigo);
         $("#nombre_cliente").val(row.data().cli_nombre);
         $("#fecha").val(row.data().ser_fecha_recepcion);
 
@@ -89,77 +90,60 @@ $(document).ready(function() {
         $("#modelo_equipo").val(row.data().ser_modelo);
         $("#descripcion_equipo").val(row.data().ser_descripcion);
 
-        $.post(base_url+"servicio/cargar_adicionales/"+row.data().ser_id,{accesorios:1},function(datos){            
-            var html ;
-            var data = JSON.parse(datos);
-            for (var i = 0; i < data.length; i++) {
+        $.post(base_url+"servicio/cargar_adicionales/"+row.data().ser_id,{accesorios:1},function(accesorios){            
+            var html ="";
+            var accesorio = JSON.parse(accesorios);
+            for (var i = 0; i < accesorio.length; i++) {
                 html += '<tr class="row_tmp">';
-                html += '<td>'+ data[i].pie_nombre +'</td>';
-                html += '<td>'+ data[i].acc_observacion +'</td>';
+                html += '<td>'+ accesorio[i].pie_nombre +'</td>';
+                html += '<td>'+ accesorio[i].acc_observacion +'</td>';
                 html += '</tr>';                
             }
             $("#Table_accesorios").append(html);
         });
 
-        $.post(base_url+"servicio/cargar_adicionales/"+row.data().ser_id,{problemas:1},function(datos){            
-            var html ;
-            var data = JSON.parse(datos);
-            for (var i = 0; i < data.length; i++) {
+        $.post(base_url+"servicio/cargar_adicionales/"+row.data().ser_id,{problemas:1},function(problemas){            
+            var html ="";
+            var problema = JSON.parse(problemas);
+            for (var i = 0; i < problema.length; i++) {
             html += '<div class="callout callout-danger">';
-            html += '<h4>'+n_cp+'</h4>';
-            html += '<p>'+o_cp+'</p>';            
+            html += '<h4>'+problema[i].catpro_descripcion+'</h4>';
+            html += '<p>'+problema[i].pro_descripcion+'</p>';            
             html += '</div>';                
             }
-            $("#Table_accesorios").append(html);
+            $("#lista_problemas").append(html);
         });
 
 
 
     } );
 
-/*
-    $('#tab tbody').on('click', 'td.eliminar-data', function () { //Agregar los datos correspondientes al modal-delete
+
+    $('#tab tbody').on('click', 'td.finalizar-data', function () { //Agregar los datos correspondientes al modal-delete
         var tr = $(this).closest('tr');
         var row = table.row( tr );
-        $("#modal_delete").modal({show: true});
-        $("#id_dato_eliminar").val(row.data().car_id);
-        $('#desc_dato_eliminar').html(row.data().car_descripcion);
-
+        $("#modal_finalizar").modal({show: true});
+        $("#id_dato_servicio").val(row.data().ser_id);
+        $("#cod_ser_finalizar").html(row.data().ser_codigo);
     } );
 
-    $('#submit_form').on('click', function () {        //Enviar los datos del modal-form a guardar en el controlador
-        var campos_form = ["abreviatura","descripcion"];//campos que queremos que se validen
-        if(!validar_form(campos_form)){
-            return false;            
-        }
-
-        id = $("#id").val();
-        descripcion = $("#descripcion").val();
-        abreviatura = $("#abreviatura").val();
-        
-        $.post(base_url+"cargo/guardar",{id:id,descripcion:descripcion,abreviatura:abreviatura},function(valor){
+    $('#finalizar_click').on('click', function () {   //Enviar los datos del modal-form a eliminar en el controlador
+        var id = $("#id_dato_servicio").val();
+        $.post(base_url+"servicio/finalizar",{id:id},function(valor){
             if(!isNaN(valor)){
-                alert('Guardado exitoso');
+                alert('Servicio Finalizado');
                 table.ajax.reload(null, false);
-                $("#modal_form").modal('hide');
-            }else{
-                alert('guardar error:'+valor);
-            }
-        });
-        
-    } );
-
-    $('#delete_click').on('click', function () {   //Enviar los datos del modal-form a eliminar en el controlador
-        var id = $("#id_dato_eliminar").val();
-        $.post(base_url+"cargo/eliminar",{id:id},function(valor){
-            if(!isNaN(valor)){
-                alert('Dato eliminado');
-                table.ajax.reload(null, false);
-                $("#modal_delete").modal('hide');
+                $("#modal_finalizar").modal('hide');
             }else{
                 alert('eliminar error:'+valor);
             }
         });
-    } );*/
+    } );
 
 } );
+
+function volver_lista(){
+    $("#tabla_servicios").removeClass('no_visible');
+    $("#detalle_servicio").addClass('no_visible');
+
+}

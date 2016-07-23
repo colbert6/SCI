@@ -6,9 +6,9 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Descripcion</th>
-                        <th>Abreviatura</th>
-                        <th>Estado</th>
+                        <th>Cargo</th>
+                        <th>Nombre</th>
+                        <th>Dni</th>
                         <th colspan="2">Acciones</th>
                     </tr>
                 </thead>  
@@ -25,7 +25,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><i class="fa fa-users"></i> Formulario Cargo</h4>
+                <h4 class="modal-title"><i class="fa fa-users"></i> Formulario Personal</h4>
             </div>
             <form role="form" action="" method="post">
                 <div class="modal-body">
@@ -33,14 +33,25 @@
                     <div class="form-group">
                         <label for="descripcion">Identificador</label>
                         <input type="text" class="form-control" id="id" name="id" readonly="readonly" >
-                    </div>  
-                    <div class="form-group">
-                        <label for="descripcion">Descripcion</label>
-                        <input type="text" required class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese descripcion" onkeypress="return soloLetras(event)">
                     </div>
                     <div class="form-group">
-                        <label for="descripcion">Abreviatura</label>
-                        <input type="text" required class="form-control" id="abreviatura" name="abreviatura" placeholder="Ingrese abreviatura" onkeypress="return soloLetras(event)">
+                        <label for="descripcion">Dni</label>
+                        <input type="text" required class="form-control" id="dni" name="dni" placeholder="Ingrese DNI" onkeypress="return soloNumeros(event)" maxlength="8">
+                    </div>  
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" required class="form-control" id="nombre" name="nombre" placeholder="Ingrese Nombre" onkeypress="return soloLetras(event)" maxlength="40">
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo_pieza">Tipo</label>
+                        <select required class="form-control" id="cargo" name="cargo">
+                            <option value=''>Seleccione Cargo</option>
+                            <?php 
+                                foreach (@$cargos->result() as $cargo) {
+                                   echo "<option value='".$cargo->car_id."'>".$cargo->car_descripcion."</option>";  
+                                }
+                            ?>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer clearfix">

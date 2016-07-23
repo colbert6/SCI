@@ -12,15 +12,16 @@
             $sql = "SELECT s.*,te.*,m.*,c.*
                     FROM servicio s INNER JOIN tipo_equipo te ON (s.ser_tipo_equipo = te.tipequ_id)
                     inner join marca m on (s.ser_marca = m.mar_id) inner join cliente c on 
-                    (c.cli_id = s.ser_cliente)";
+                    (c.cli_id = s.ser_cliente) and s.ser_estado_servicio=1";
             $query=$this->db->query($sql);      
             return $query;            
         }
 
         function select_all(){ 
             $sql="SELECT ser.*,cli.*,t_eq.*,mar.*
-                    FROM servicio as ser,cliente as cli,tipo_equipo as t_eq, marca as mar 
-                    WHERE ser.ser_cliente=cli.cli_id and ser.ser_tipo_equipo=t_eq.tipequ_id and ser.ser_marca=mar.mar_id  ";  
+                  FROM servicio as ser,cliente as cli,tipo_equipo as t_eq, marca as mar 
+                  WHERE ser.ser_cliente=cli.cli_id and ser.ser_tipo_equipo=t_eq.tipequ_id and ser.ser_marca=mar.mar_id 
+                            and ser.ser_estado_servicio=1 ";  
             $query=$this->db->query($sql);      
             return $query;            
         }
@@ -85,10 +86,10 @@
             return $query;
         }
 
-        function eliminar($id){
-            $datos=array('ser_estado' => 0 );
-            $this->db->where("cli_id",$id);
-            if($this->db->update('cliente',$datos)){
+        function finalizar($id){
+            $datos=array('ser_estado_servicio' => 0 );
+            $this->db->where("ser_id",$id);
+            if($this->db->update('servicio',$datos)){
                  $query=0;
             }else{
                  $query=$this->db->_error_message();

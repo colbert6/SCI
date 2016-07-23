@@ -22,7 +22,7 @@
             </div>
         </div>
         <div id="detalle_servicio" class="no_visible">
-           
+            <button class="btn btn-info btn-flat" type="button" onclick="volver_lista();";><i class="fa fa-plus"></i> Volver</button>
                 <div class="row"><!-- Formulario de la ruta Viaje -->
                     <div class="col-md-12">
                         <div class="box box-primary">
@@ -163,10 +163,32 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-info btn-flat" type="button" id="volver_tabla_servicios">Volver</button>
-                
 
         </div>
     </div>   
 </div>
 
+<div class="modal fade" id="modal_finalizar" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><i class="fa fa-exclamation-circle"></i>Finalizar Servicio </h4>
+            </div>
+            <form role="form" action="" method="post">
+                <input type="hidden" id='id_dato_servicio'></input>
+               
+                <div class="modal-body" >
+                    <div class="alert alert-danger alert-dismissable">
+                        <i class="fa fa-warning"></i>
+                        <h4>Estas seguro que desea Finalizar el servicio con codigo: </h4><h4 id="cod_ser_finalizar"></h4>
+                    </div>
+                </div>
+                <div class="modal-footer clearfix">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
+                    <button type="button" id="finalizar_click" class="btn btn-primary pull-left"><i class="fa fa-check"></i> Aceptar</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->                

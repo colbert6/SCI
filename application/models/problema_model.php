@@ -14,8 +14,10 @@
             return $query;            
         }
 
-        function select_serv_problema(){
-            $sql="";
+        function select_serv_problema($id){
+            $sql="SELECT pro.*,c_pro.* 
+                FROM problema as pro, categoria_problema as c_pro 
+                WHERE pro.catpro_id=c_pro.catpro_id and pro.ser_id=".$id;
             $query=$this->db->query($sql);      
             return $query;            
         }

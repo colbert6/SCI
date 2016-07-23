@@ -94,9 +94,9 @@
             echo json_encode($guardar);
         }
      
-        public function eliminar()
+        public function finalizar()
         {            
-            $guardar=$this->servicio_model->eliminar($_POST['id']);
+            $guardar=$this->servicio_model->finalizar($_POST['id']);
             echo json_encode($guardar);  
         }
 
@@ -122,9 +122,9 @@
             }else if(!empty($_POST['soluciones'])){
                 
             }else if(!empty($_POST['repuestos'])){
-                
+            
             } 
-            $consulta=$this->servicio_model->select_accesorios($id);
+            
             $result= $consulta->result();
             echo json_encode($result);
         }

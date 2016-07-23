@@ -5,15 +5,17 @@
         
         function __construct(){
             parent::__construct();
-            $this->load->model('personal_model');           
+            $this->load->model('personal_model');
+            $this->load->model('cargo_model');           
         }
         
         public function index()
         {   
             $dato_header= array ( 'titulo'=> 'Personal');
+            $data = array('cargos' => $this->cargo_model->select());
 
             $this->load->view("/layout/header.php",$dato_header);
-            $this->load->view("/personal/index.php");
+            $this->load->view("/personal/index.php",$data);
             $this->load->view("/layout/foother_table.php");
         }
 
@@ -21,16 +23,16 @@
         {   
             if(!empty($_POST['id'])) {
                 $data= array (  'id'=> $this->input->post('id'),
-                                'car_id'=> $this->input->post('car_id'),
-                                'per_dni'=> $this->input->post('per_dni'),
-                                'per_nombre'=> $this->input->post('per_nombre')
+                                'car_id'=> $this->input->post('cargo'),
+                                'per_dni'=> $this->input->post('dni'),
+                                'per_nombre'=> $this->input->post('nombre')
                                 );
                 $guardar=$this->personal_model->editar($data);   
 
             }else{
-                $data= array (  'car_id'=> $this->input->post('car_id'),
-                                'per_dni'=> $this->input->post('per_dni'),
-                                'per_nombre'=> $this->input->post('per_nombre')
+                $data= array (  'car_id'=> $this->input->post('cargo'),
+                                'per_dni'=> $this->input->post('dni'),
+                                'per_nombre'=> $this->input->post('nombre')
                              );
                 $guardar=$this->personal_model->crear($data);
                 
