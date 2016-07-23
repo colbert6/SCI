@@ -1,6 +1,8 @@
 $(document).ready(function() {
     var base_url = $("#base_url").val();
+    
     var table =$('#tab').DataTable( {
+    
 
         "processing": true,
         "ajax": {
@@ -8,15 +10,23 @@ $(document).ready(function() {
             "type": "POST"
         },
         "columns": [
-            { "data": "ser_id" },
-            { "data": "ser_codigo" },
-            { "data": "ser_tipo_equipo" },
-            { "data": "ser_marca" }, 
-            { "data": "ser_modelo" },
-            { "data": "ser_descripcion" }, 
-            { "data": "ser_estado_recepcion" },
-            { "data": "ser_estado_servicio" },
-            { "data": "ser_fecha_recepcion" },
+            { "data": "ser_id"},
+            { "data": "cli_nombre" },
+            { "data": "tipequ_abreviatura" },
+            { "data": "mar_abreviatura" }, 
+            { "data": "ser_modelo" },             
+            {
+                "className":      'detallar-data',
+                "orderable":      false,
+                "data":           null,
+                "defaultContent": ''
+            },
+            {
+                "className":      'editar-data',
+                "orderable":      false,
+                "data":           null,
+                "defaultContent": ''
+            },
         ],
         "bPaginate": true,
         "bLengthChange": true,
@@ -53,57 +63,12 @@ $(document).ready(function() {
         'aLengthMenu': [[5, 10, 20], [5, 10, 20]]
     } );
 
-/*    $('#tab tbody').on('click', 'td.editar-data', function () { //Agregar los datos correspondientes al modal-form
-        var tr = $(this).closest('tr');
-        var row = table.row( tr );
-        $("#id").val(row.data().car_id);
-        $("#descripcion").val(row.data().car_descripcion);
-        $("#abreviatura").val(row.data().car_abreviatura);
-        $("#modal_form").modal({show: true});
+    $('#tab tbody').on('click', 'td.editar-data', function () { //Agregar los datos correspondientes al modal-form
+        window.location.href = base_url+"solucion/nueva_solucion";
     } );
 
     $('#tab tbody').on('click', 'td.eliminar-data', function () { //Agregar los datos correspondientes al modal-delete
-        var tr = $(this).closest('tr');
-        var row = table.row( tr );
-        $("#modal_delete").modal({show: true});
-        $("#id_dato_eliminar").val(row.data().car_id);
-        $('#desc_dato_eliminar').html(row.data().car_descripcion);
-
-    } );
-
-    $('#submit_form').on('click', function () {        //Enviar los datos del modal-form a guardar en el controlador
-        var campos_form = ["abreviatura","descripcion"];//campos que queremos que se validen
-        if(!validar_form(campos_form)){
-            return false;            
-        }
-
-        id = $("#id").val();
-        descripcion = $("#descripcion").val();
-        abreviatura = $("#abreviatura").val();
-        
-        $.post(base_url+"cargo/guardar",{id:id,descripcion:descripcion,abreviatura:abreviatura},function(valor){
-            if(!isNaN(valor)){
-                alert('Guardado exitoso');
-                table.ajax.reload(null, false);
-                $("#modal_form").modal('hide');
-            }else{
-                alert('guardar error:'+valor);
-            }
-        });
         
     } );
-
-    $('#delete_click').on('click', function () {   //Enviar los datos del modal-form a eliminar en el controlador
-        var id = $("#id_dato_eliminar").val();
-        $.post(base_url+"cargo/eliminar",{id:id},function(valor){
-            if(!isNaN(valor)){
-                alert('Dato eliminado');
-                table.ajax.reload(null, false);
-                $("#modal_delete").modal('hide');
-            }else{
-                alert('eliminar error:'+valor);
-            }
-        });
-    } );*/
 
 } );

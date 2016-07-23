@@ -27,21 +27,22 @@
                         'sol_descripcion' => $data['sol_descripcion'],
                         'sol_fecha' => $data['sol_fecha']
                         );
-            if($this->db->insert('solucion',$datos)){
-                 $query=0;
+            if($this->db->insert('solucion',$datos)){     
+                 $sql="SELECT max(sol_id) as ult FROM solucion";
+                 $query=$this->db->query($sql); 
             }else{
                  $query=$this->db->_error_message();
             }
+            
             return $query;            
         }
 
-        function crear_accesorio($data){
+        function crear_repuesto($data){
             $datos=array(
-                        'ser_id' => $data['ser_id'],
-                        'pie_id' => $data['pie_id'],
-                        'acc_observacion' => $data['acc_observacion'] 
+                        'sol_id' => $data['sol_id'],
+                        'pie_id' => $data['pie_id']
                         );
-            if($this->db->insert('accesorio',$datos)){
+            if($this->db->insert('repuesto',$datos)){
                  $query=0;
             }else{
                  $query=$this->db->_error_message();

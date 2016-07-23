@@ -121,7 +121,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="<?= base_url(); ?>solucion/nueva_solucion"><i class="fa fa-angle-double-right"></i>Nuevo</a></li>
-                                <li><a href="<?= base_url(); ?>solucion/lista_solucion"><i class="fa fa-angle-double-right"></i>Detalles</a></li>
+                                <li><a href="<?= base_url(); ?>solucion/lista_servicio"><i class="fa fa-angle-double-right"></i>Detalles x Servicio</a></li>
                             </ul>
                         </li>
                     </ul>
