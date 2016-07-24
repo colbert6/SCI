@@ -1,4 +1,13 @@
-
+<?php 
+    
+    if($data_servicio!=0){
+        $id = $data_servicio[0]->ser_id;
+        $name = $data_servicio[0]->tipequ_descripcion ." - ".$data_servicio[0]->mar_descripcion;
+    }else{
+        $id = "";
+        $name = "";
+    }
+?>
 <style type="text/css">
 .option_oculta{
     display: none;
@@ -20,6 +29,7 @@
 
 <form role="form" action="" method="post">
 <input type="hidden" value="1" name="guardar">    
+<input type="hidden" id='cont_sol' value="0">    
 <div class="row"><!-- Formulario de la ruta Viaje -->
     <div class="col-md-12">
         <div class="box box-primary">
@@ -31,13 +41,14 @@
                 <div class="row" >   
                     <div class="col-md-5">                           
                         <div class="form-group" >
-                                                           
                             <div class="col-md-9" style="padding-right: 0px;">
-                                <input name="id_servicio" id="id_servicio" type="hidden">
-                            
-                                <input name="nombre_servicio" id="nombre_servicio" class="form-control" readonly="true" placeholder="Servicio">
+                                <input name="id_servicio" id="id_servicio" type="hidden" value="<?= $id; ?>">
+                                <input name="nombre_servicio" id="nombre_servicio" class="form-control" readonly="true" placeholder="Servicio" value="<?= $name; ?>">
                             </div>
+                            
+                            <?php if($data_servicio==0){ ?>
                             <a class="btn btn-success k-button" id="servicio_buscar" data-toggle="modal" data-target="#modal_servicio_buscar">Buscar</a>
+                            <?php } ?>
                         </div>
                     </div>
 
@@ -86,7 +97,7 @@
     </div>
 </div>
 
-<button class="btn btn-info btn-flat" type="button" id="submit_form_servicio">Guardar</button>
+<button class="btn btn-info btn-flat" type="button" id="submit_form_solucion">Guardar</button>
 <button class="btn btn-info btn-flat" onclick="prueba()" type="button">prueba</button>
 </form>
 
@@ -141,6 +152,7 @@
 </div><!-- /.modal -->
 
 <!-- MODAL REPUESTO BUSCAR  -->
+
 <div class="modal fade" id="modal_repuesto_buscar" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -178,7 +190,7 @@
                 <div class="modal-body" >
                     <div class="alert alert-success alert-dismissable">
                         <i class="fa fa-check"></i>
-                        <h4>Se genero un nuevo servicio, Codigo [ </h4><h4 id="cod_servicio"></h4> <h4>]</h4>
+                        <h4>La Solucion ha Sido Agregada</h4>
                     </div>
                 </div>
                 <div class="modal-footer clearfix">

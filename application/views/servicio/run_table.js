@@ -117,7 +117,15 @@ $(document).ready(function() {
 
 
     } );
+    
+    $('#tab tbody').on('click', 'td.solucionar-data', function () { //Agregar los datos correspondientes al modal-form
+        
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+        var id = row.data().ser_id;
+        window.location.href = base_url+"solucion/nueva_solucion/"+id;
 
+    } );
 
     $('#tab tbody').on('click', 'td.finalizar-data', function () { //Agregar los datos correspondientes al modal-delete
         var tr = $(this).closest('tr');

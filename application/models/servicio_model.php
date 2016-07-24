@@ -12,11 +12,21 @@
             $sql = "SELECT s.*,te.*,m.*,c.*
                     FROM servicio s INNER JOIN tipo_equipo te ON (s.ser_tipo_equipo = te.tipequ_id)
                     inner join marca m on (s.ser_marca = m.mar_id) inner join cliente c on 
-                    (c.cli_id = s.ser_cliente) and s.ser_estado_servicio=1";
+                    (c.cli_id = s.ser_cliente) 
+                    WHERE s.ser_estado_servicio=1";
             $query=$this->db->query($sql);      
             return $query;            
         }
 
+        function select_id($id){ 
+            $sql = "SELECT s.*,te.*,m.*,c.*
+                    FROM servicio s INNER JOIN tipo_equipo te ON (s.ser_tipo_equipo = te.tipequ_id)
+                    inner join marca m on (s.ser_marca = m.mar_id) inner join cliente c on 
+                    (c.cli_id = s.ser_cliente)
+                    WHERE s.ser_estado_servicio=1 and s.ser_id=$id";
+            $query=$this->db->query($sql);      
+            return $query;
+        }
         function select_all(){ 
             $sql="SELECT ser.*,cli.*,t_eq.*,mar.*
                   FROM servicio as ser,cliente as cli,tipo_equipo as t_eq, marca as mar 
