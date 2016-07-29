@@ -16,12 +16,6 @@ $(document).ready(function() {
             { "data": "mar_abreviatura" }, 
             { "data": "ser_modelo" },             
             {
-                "className":      'detallar-data',
-                "orderable":      false,
-                "data":           null,
-                "defaultContent": ''
-            },
-            {
                 "className":      'editar-data',
                 "orderable":      false,
                 "data":           null,
@@ -64,11 +58,10 @@ $(document).ready(function() {
     } );
 
     $('#tab tbody').on('click', 'td.editar-data', function () { //Agregar los datos correspondientes al modal-form
-        window.location.href = base_url+"solucion/nueva_solucion";
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+        window.location.href = base_url+"solucion/lista_solucion/"+row.data().ser_id;
     } );
 
-    $('#tab tbody').on('click', 'td.eliminar-data', function () { //Agregar los datos correspondientes al modal-delete
-        
-    } );
 
 } );

@@ -43,16 +43,27 @@
 
             if($idserv){
                 $servicio = $this->servicio_model->select_id($idserv);
-                $data = $servicio->result();
+                $data_servicios = $servicio->result();
+                $solucion = $this->solucion_model->selectSolucion_id($idserv);
+                $data_solucciones = $solucion->result();
+                $repuesto = $this->solucion_model->selectRepuesto();
+                $data_repuesto = $repuesto->result();
             }else{
-                $data = 0;
+                $data_servicios = 0;
+                $data_solucciones = 0;
+                $data_repuesto = 0;
             }
-            $parametro=array('data_servicio' => $data);
+            $parametro=array(
+                        'data_servicio' => $data_servicios,
+                        'data_solucion' => $data_solucciones,
+                        'data_repuesto' => $data_repuesto
+                        );
             $dato_header= array ( 'titulo'=> 'Lista de Soluciones');
+            $dato_foother= array ( 'add_solucion'=> 'su');
 
             $this->load->view("/layout/header.php",$dato_header);
             $this->load->view("/solucion/lista.php",$parametro);
-            $this->load->view("/layout/foother_table.php");
+            $this->load->view("/layout/foother_table.php",$dato_foother);
         }
        
 
@@ -83,7 +94,12 @@
 
         public function eliminar()
         {            
-            $guardar=$this->servicio_model->eliminar($_POST['id']);
+            $guardar=$this->solucion_model->eliminar($this->input->post('sol_id'));
+            echo json_encode($guardar);  
+        }
+        public function eliminarRepuesto()
+        {            
+            $guardar=$this->solucion_model->eliminarRepuesto($this->input->post('rep_id'));
             echo json_encode($guardar);  
         }
 

@@ -8,17 +8,28 @@
     
         }
 
+    
         function select(){ 
             $query=$this->db->get("solucion");      
             return $query;            
         }
 
-        function parametros_nueva_solucion(){
-            $sql="SELECT max(sol_id + 1) as num_sol FROM solucion ";  
+        function selectSolucion_id($id){ 
+            $sql = "SELECT s.*,ss.*,p.*
+                    FROM solucion s INNER JOIN servicio ss 
+                    on (ss.ser_id=s.ser_id)  
+                    INNER JOIN personal p ON (p.per_id=s.per_id)
+                    WHERE s.ser_id = $id";
             $query=$this->db->query($sql);      
             return $query;            
         }
-
+        function selectRepuesto(){ 
+            $sql = "SELECT r.*,p.*,tp.* 
+                    FROM repuesto r INNER JOIN pieza p on (r.pie_id=p.pie_id)
+                    inner JOIN tipo_pieza tp  on (p.tipie_id=tp.tipie_id)";
+            $query=$this->db->query($sql);      
+            return $query;            
+        }
         function crear($data){
             $datos=array(
                         'ser_id' => $data['ser_id'],
@@ -71,18 +82,18 @@
         }
 
         function eliminar($id){
-            $datos=array('ser_estado' => 0 );
-            $this->db->where("cli_id",$id);
-            if($this->db->update('cliente',$datos)){
-                 $query=0;
-            }else{
-                 $query=$this->db->_error_message();
-            }
+            $sql1  = "DELETE FROM repuesto WHERE sol_id=".$id.";";
+            $sql2  = "DELETE FROM solucion where sol_id=".$id.";";
+            $query=$this->db->query($sql1);      
+            $query1=$this->db->query($sql2);      
+            return ($query && $query1) ; 
+        }
+        function eliminarRepuesto($id){
+            $sql  = "DELETE FROM repuesto WHERE rep_id=".$id.";";
+            $query=$this->db->query($sql);      
             return $query;
         }
-       // 'ser_estado_servicio' => 1 etapa 1
-       // 'ser_estado_servicio' => 2 etapa 2
-       // 'ser_estado_servicio' => 3 etapa 3
+
 
     }
 ?>

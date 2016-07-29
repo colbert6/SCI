@@ -26,7 +26,9 @@
         <?php
             }else if(isset ($add_solucion) && $add_solucion=='so'){?>
             <script src="<?= base_url(); ?>application/views/<?= $this->uri-> segment(1);?>/nueva_solucion.js" type="text/javascript"></script>  
-        <?php    }
+        <?php    }else if (isset ($add_solucion) && $add_solucion=='su'){?>
+            <script src="<?= base_url(); ?>application/views/<?= $this->uri-> segment(1);?>/lista_solucion.js" type="text/javascript"></script>  
+        <?php }
         ?>
 
     </body>
